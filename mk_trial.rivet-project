@@ -1,0 +1,3140 @@
+version: 4
+data:
+  attachedData:
+    trivet:
+      testSuites:
+        - id: azV4M3o4FSr-2aykCefr7
+          name: Test Validator BMP
+          testCases:
+            - expectedOutput:
+                AUTOR_NOME_COMPLETO: PATRÍCIA NASCIMENTO DE ALMEIDA
+                autor_artigo: a Autora
+                autor_artigo_sujeito: a Autora
+                caps_autor_artigo_sujeito: A Autora
+                dependency_alteracao_itinerario: ""
+                dependency_avaria_bagagem_ausencia_demonstracao: ""
+                dependency_avaria_bagagem_inversao_do_onus: ""
+                dependency_inversao_do_onus: Fica
+                destino_da_viagem: Istambul
+                itinerario_completo: Rio de Janeiro – São Paulo - Istambul
+                nome_da_acao: AÇÃO INDENIZATÓRIA POR DANOS MORAIS E MATERIAIS
+                origem_da_viagem: Rio de Janeiro
+                tag_autor: Autora
+              id: n16HFB-5jZ0VPncKjZY8B
+              input:
+                enderecamento: EXCELENTISSIMO ETC
+                peticao_inicial: file_input
+          testGraph: OhbuUfcMpthjrriAEcVgD
+          validationGraph: J7k0Em3n2Lbdqc5rEaoKL
+      version: 1
+  graphs:
+    7ou7a2Ta97As0gb-5bS3r:
+      metadata:
+        description: ""
+        id: 7ou7a2Ta97As0gb-5bS3r
+        name: ChatWithFunctionsListOutput
+      nodes:
+        '[1Z1UCFEoaVyk6VpTrYrS_]:if "If"':
+          data:
+            unconnectedControlFlowExcluded: true
+          outgoingConnections:
+            - falseOutput->"Chat (Anthropic)" QBmQkeWBlmajMqUfzE7q2/prompt
+            - output->"Chat" Z46AQNstKzHr-7P63L0GV/prompt
+          visualData: -902.7917779157088/-883.1989330812557/155/297//
+        '[Dqr_SJkFGoPhbV3R5YEVz]:code "Code"':
+          data:
+            code: >-
+              // This is a code node, you can write and JS in here and it will
+              be executed.
+
+              // Inputs are accessible via an object `inputs` and data is typed (i.e. inputs.foo.type, inputs.foo.value)
+
+              // Return an object with named outputs that match the output names specified in the node's config.
+
+              // Output values must by typed as well (e.g. { bar: { type: 'string', value: 'bar' } }
+
+              return {
+                final_prompt: {
+                  type: 'string',
+                  value: inputs.raw_prompt.value.replace(">>template<<", "").replace(">>list_template<<", "").replace(">>explanation<<","").replace(":string","").replace(":dependency","").replace(":slashed_date","").replace(":currency","").replace(":quantity","").replace(":cpf","").replace(":cnpj","")
+                }
+              };
+            inputNames:
+              - raw_prompt
+            outputNames:
+              - final_prompt
+          outgoingConnections:
+            - final_prompt->"If" 1Z1UCFEoaVyk6VpTrYrS_/value
+          visualData: -1738.4510974276357/-1226.5112012883828/230/284//
+        '[GcwoUnVTpD2oUuoq2l6P8]:getGlobal "Global - Temperature"':
+          data:
+            dataType: any
+            id: temperature
+            onDemand: false
+            useIdInput: false
+            wait: true
+          outgoingConnections:
+            - value->"Chat (Anthropic)" QBmQkeWBlmajMqUfzE7q2/temperature
+            - value->"Chat" Z46AQNstKzHr-7P63L0GV/temperature
+          visualData: -1477.2612777208392/-1798.6678133939126/230/288//
+        '[Ie8Zr1rqyaIuYEttIw1xR]:getGlobal "Global - Top P"':
+          data:
+            dataType: any
+            id: top_p
+            onDemand: false
+            useIdInput: false
+            wait: true
+          outgoingConnections:
+            - value->"Chat (Anthropic)" QBmQkeWBlmajMqUfzE7q2/top_p
+            - value->"Chat" Z46AQNstKzHr-7P63L0GV/top_p
+          visualData: -1478.7114185395783/-1600.6469774193963/230/287//
+        '[PAMM6BFWrM0hDQMs2n9P6]:graphOutput "Graph Output"':
+          data:
+            dataType: string[]
+            id: list_of_objects
+          visualData: 808.5887463493265/-1098.2490878312778/330/314//
+        '[PAjFWzilgzR6mud0g4MXQ]:extractObjectPath "Extract Object Path"':
+          data:
+            path: $.arguments.desired_items_list
+            usePathInput: false
+          outgoingConnections:
+            - match->"If/Else" km99zkMz1vTw8yfnCduBf/false
+          visualData: 146.47717850492984/-739.5749427075738/280/336//
+        '[Q7Ws__Lkp8XhpurBnPeUR]:getGlobal "Global - Max Tokens"':
+          data:
+            dataType: any
+            id: max_tokens
+            onDemand: false
+            useIdInput: false
+            wait: true
+          outgoingConnections:
+            - value->"Chat (Anthropic)" QBmQkeWBlmajMqUfzE7q2/maxTokens
+            - value->"Chat" Z46AQNstKzHr-7P63L0GV/maxTokens
+          visualData: -1470.9151557647185/-1419.0373790815852/230/286//
+        '[QBmQkeWBlmajMqUfzE7q2]:chatAnthropic "Chat (Anthropic)"':
+          data:
+            cache: false
+            maxTokens: 1024
+            model: claude-2
+            stop: ""
+            temperature: 0.5
+            top_p: 1
+            useAsGraphPartialOutput: true
+            useMaxTokensInput: true
+            useModelInput: true
+            useStop: false
+            useStopInput: false
+            useTemperatureInput: true
+            useTopKInput: false
+            useTopP: false
+            useTopPInput: true
+            useUseTopPInput: false
+          outgoingConnections:
+            - response->"Code" lRvv4U1h87gCpuYcN0Fgf/llm_result
+          visualData: -505.3918164032983/-900.0763027964774/305/337//
+        '[T6SekL2P77vAlf64SVGbk]:getGlobal "Global - System Role"':
+          data:
+            dataType: string
+            id: system_role
+            onDemand: false
+            useIdInput: false
+            wait: true
+          outgoingConnections:
+            - value->"Chat" Z46AQNstKzHr-7P63L0GV/systemPrompt
+          visualData: -1246.9704266056833/-2162.6118144223638/230/222//
+        '[YJMpgouwVAFjjc7U4Nz50]:graphInput "Graph Input"':
+          data:
+            dataType: string
+            id: input
+            useDefaultValueInput: true
+          outgoingConnections:
+            - data->"Code" Dqr_SJkFGoPhbV3R5YEVz/raw_prompt
+            - data->"Code" _qaCU-7ytgo9ywiUtL1bo/raw_prompt
+          visualData: -2215.764585717574/-1160.351991420572/330/283//
+        '[Z46AQNstKzHr-7P63L0GV]:chat "Chat"':
+          data:
+            cache: false
+            code: ""
+            enableFunctionUse: true
+            frequencyPenalty: 0
+            headers: []
+            maxTokens: 1024
+            model: gpt-3.5-turbo-16k-0613
+            presencePenalty: 0
+            responseFormat: ""
+            stop: ""
+            temperature: 0.5
+            toolChoice: function
+            toolChoiceFunction: get_json
+            top_p: 1
+            useAsGraphPartialOutput: true
+            useFrequencyPenaltyInput: false
+            useMaxTokensInput: true
+            useModelInput: true
+            usePresencePenaltyInput: false
+            useStop: false
+            useStopInput: false
+            useTemperatureInput: true
+            useTopP: false
+            useTopPInput: true
+            useUseTopPInput: false
+            useUserInput: false
+          outgoingConnections:
+            - function-call->"Extract Object Path" xOm_GPWEC54ndHHx0--fF/object
+          visualData: -524.5068247740273/-1319.3140023386943/230/338//
+        '[_qaCU-7ytgo9ywiUtL1bo]:code "Code"':
+          data:
+            code: >-
+              // This is a code node, you can write and JS in here and it will
+              be executed.
+
+              // Inputs are accessible via an object `inputs` and data is typed (i.e. inputs.foo.type, inputs.foo.value)
+
+              // Return an object with named outputs that match the output names specified in the node's config.
+
+              // Output values must by typed as well (e.g. { bar: { type: 'string', value: 'bar' } }
+
+              let raw_prompt = inputs.raw_prompt.value
+
+
+              let functionsJson = {}
+
+              functionsJson["type"] = "object"
+
+              functionsJson["properties"] = {}
+
+              functionsJson["required"] = []
+
+              if (raw_prompt.includes(">>list_template<<")) {
+                  functionsJson["properties"]["desired_items_list"] = {
+                      "type": "array",
+                      "items": {
+                          "type": "object",
+                          "required": [],
+                          "properties": {}
+                      }
+                  }
+                  functionsJson["required"].push("desired_items_list")
+                  let listTemplateLines = raw_prompt.split("\n").filter(l => l.includes(">>list_template<<"))
+                  for (let idx = 0; idx < listTemplateLines.length; idx++) {
+                      let templateName = listTemplateLines[idx].match(/"([^']+)"/)[1]
+                      functionsJson["properties"]["desired_items_list"]["items"]["required"].push(templateName)
+                      functionsJson["properties"]["desired_items_list"]["items"]["properties"][templateName] = {
+                          "type": "string"
+                      }
+                  }
+              }
+
+              else if (raw_prompt.includes(">>template<<")) {
+                  let templateLines = raw_prompt.split("\n").filter(l => l.includes(">>template<<"))
+                  for (let idx = 0; idx < templateLines.length; idx++) {
+                      let templateName = templateLines[idx].match(/"([^']+)"/)[1]
+                      functionsJson["properties"][templateName] = {
+                          "type": "string"
+                      }
+                      functionsJson["required"].push(templateName)
+                  }
+              }
+
+
+
+
+              return {
+                openai_functions: {
+                  type: "object",
+                  value: functionsJson
+                }
+              };
+            inputNames:
+              - raw_prompt
+            outputNames:
+              - openai_functions
+          outgoingConnections:
+            - openai_functions->"GPT Function" wab9nEJB3yOPoE8hPlEG3/schema
+          visualData: -1714.8530836285302/-811.3461865877446/230/325//
+        '[e3WNkorSD6CG-1CFwdzjM]:code "Code"':
+          data:
+            code: >-
+              // This is a code node, you can write and JS in here and it will
+              be executed.
+
+              // Inputs are accessible via an object `inputs` and data is typed (i.e. inputs.foo.type, inputs.foo.value)
+
+              // Return an object with named outputs that match the output names specified in the node's config.
+
+              // Output values must by typed as well (e.g. { bar: { type: 'string', value: 'bar' } }
+
+              let is_open_ai = inputs.model_name.value.includes("gpt") ? true : false
+
+
+              return {
+                is_open_ai: {
+                  type: 'boolean',
+                  value: is_open_ai
+                }
+              };
+            inputNames:
+              - model_name
+            outputNames:
+              - is_open_ai
+          outgoingConnections:
+            - is_open_ai->"If" 1Z1UCFEoaVyk6VpTrYrS_/if
+            - is_open_ai->"If/Else" km99zkMz1vTw8yfnCduBf/if
+          visualData: -1175.5786576926912/-1242.4792137631327/230/295//
+        '[ef6zzPTD9fDvAcZnZklom]:graphInput "Graph Input"':
+          data:
+            dataType: string
+            defaultValue: Get entities list as defined in the JSON schema
+            id: openai_functions_description
+            schema: ""
+            useDefaultValueInput: false
+          outgoingConnections:
+            - data->"GPT Function" wab9nEJB3yOPoE8hPlEG3/description
+          visualData: -2214.2266864197527/-430.4415999999993/330/309//
+        '[km99zkMz1vTw8yfnCduBf]:ifElse "If/Else"':
+          data:
+            unconnectedControlFlowExcluded: true
+          outgoingConnections:
+            - output->"Graph Output" PAMM6BFWrM0hDQMs2n9P6/value
+          visualData: 308.1158347528474/-1061.5084057159663/205/null//
+        '[lRvv4U1h87gCpuYcN0Fgf]:code "Code"':
+          data:
+            code: >-
+              // This is a code node, you can write and JS in here and it will
+              be executed.
+
+              // Inputs are accessible via an object `inputs` and data is typed (i.e. inputs.foo.type, inputs.foo.value)
+
+              // Return an object with named outputs that match the output names specified in the node's config.
+
+              // Output values must by typed as well (e.g. { bar: { type: 'string', value: 'bar' } }
+
+
+              // Find the JSON within the input string
+
+              const llmResultString = JSON.stringify(inputs.llm_result.value)
+
+
+              let startIndex = llmResultString.indexOf("[");
+
+              let endIndex = llmResultString.lastIndexOf("]");
+
+
+              if (startIndex != -1 && endIndex != -1) {
+                let jsonStr = llmResultString.slice(startIndex, endIndex + 1);
+                // Attempt to parse the JSON
+                jsonStr = jsonStr.replaceAll('\\n', '\n'); // replace occurrences of \n
+                jsonStr = jsonStr.replaceAll('\\"', '"'); // replace occurrences of \n
+                const llmProcessedObject = {
+                  "arguments": {
+                    "desired_items_list": JSON.parse(jsonStr)
+                  }
+                }
+                return {
+                  output: {
+                    value: llmProcessedObject,
+                    type: 'object'
+                  }
+                }
+              }
+
+              else {
+                throw new Error("No valid JSON found in the input string.");
+              }
+            inputNames:
+              - llm_result
+            outputNames:
+              - output
+          outgoingConnections:
+            - output->"Extract Object Path" PAjFWzilgzR6mud0g4MXQ/object
+          visualData: -144.993077985039/-739.5749427075732/230/339//
+        '[oQYmiHOcM3ZES1m4dUh0K]:getGlobal "Global - Model Name"':
+          data:
+            dataType: string
+            id: model_name
+            onDemand: false
+            useIdInput: false
+            wait: true
+          outgoingConnections:
+            - value->"Chat (Anthropic)" QBmQkeWBlmajMqUfzE7q2/model
+            - value->"Chat" Z46AQNstKzHr-7P63L0GV/model
+            - value->"Code" e3WNkorSD6CG-1CFwdzjM/model_name
+          visualData: -1481.1679429020196/-2011.3942644869555/230/289//
+        '[wab9nEJB3yOPoE8hPlEG3]:gptFunction "GPT Function"':
+          data:
+            description: Get entities list as defined in the JSON schema
+            name: get_json
+            schema: |-
+              {
+                "type": "object",
+                "properties": {}
+              }
+            useDescriptionInput: true
+            useNameInput: false
+            useSchemaInput: true
+          outgoingConnections:
+            - function->"Chat" Z46AQNstKzHr-7P63L0GV/functions
+          visualData: -1240.733906172839/-750.192553086419/280/310//
+        '[xOm_GPWEC54ndHHx0--fF]:extractObjectPath "Extract Object Path"':
+          data:
+            code: ""
+            path: $.arguments.desired_items_list
+            usePathInput: false
+          outgoingConnections:
+            - match->"If/Else" km99zkMz1vTw8yfnCduBf/true
+          visualData: -250.02009260921454/-1265.462094788866/280/331//
+    AyQeZ4we5T_SGin85M5XS:
+      metadata:
+        description: ""
+        id: AyQeZ4we5T_SGin85M5XS
+        name: LogOutputToLambda
+      nodes:
+        '[2u9g8N-TXN4L2WrZl79ZQ]:text "FALSE"':
+          data:
+            text: "false"
+          outgoingConnections:
+            - output->"Compare" DxuySxynUQWOurAA8NBG1/b
+          visualData: 304.4210804291502/253.33107107697646/330/61//
+        '[DxuySxynUQWOurAA8NBG1]:compare "Compare"':
+          data:
+            comparisonFunction: ==
+          outgoingConnections:
+            - output->"If" hXT34vECs3KcGDqmWfS6_/if
+          visualData: 853.7109034779244/87.71727809005642/190/55//
+        '[I6AGcjx1T1IGBklgOrF_X]:graphInput "Graph Input"':
+          data:
+            dataType: string
+            id: model_name
+            useDefaultValueInput: false
+          outgoingConnections:
+            - data->"If" hXT34vECs3KcGDqmWfS6_/value
+          visualData: 354/452/330/48//
+        '[J8VdrEGyvf887NAXSQl1o]:graphInput "Graph Input"':
+          data:
+            dataType: string
+            id: prompt_text
+            useDefaultValueInput: false
+          visualData: 407.5132467462262/859.9470813006138/330/64//
+        '[d7j3-WPo8JwO6bLxIPljH]:getGlobal "Get Global"':
+          data:
+            dataType: string
+            id: is_running_on_local_rivet_app
+            onDemand: false
+            useIdInput: false
+            wait: true
+          outgoingConnections:
+            - value->"Compare" DxuySxynUQWOurAA8NBG1/a
+          visualData: 427.7051756638285/13.086194366060894/230/59//
+        '[hXT34vECs3KcGDqmWfS6_]:if "If"':
+          data:
+            unconnectedControlFlowExcluded: true
+          outgoingConnections:
+            - output->"External Call" v-kgANCrLChP_gfscqDcO/arguments
+          visualData: 874.9506172839506/471.2901234567902/155/null//
+        '[v-kgANCrLChP_gfscqDcO]:externalCall "External Call"':
+          data:
+            functionName: print
+            useErrorOutput: false
+            useFunctionNameInput: false
+          visualData: 1228.9876543209875/468.01234567901236/193.61464652173368/49//
+        '[xyyvDmy3FX7tNlHNXS8Oi]:graphInput "GRAPH INPUT"':
+          data:
+            dataType: string
+            id: entry
+            useDefaultValueInput: false
+          visualData: 414.0243309346732/686.3181696086962/330/63//
+    CFtE0iCYza8rNiWbag0IW:
+      metadata:
+        description: ""
+        id: CFtE0iCYza8rNiWbag0IW
+        name: GetFinalAiReasonsJson
+      nodes:
+        '[-1DqHmVdokGuSh4ryZh3S]:graphInput "Graph Input"':
+          data:
+            dataType: object[]
+            id: list_of_jsons_2
+            useDefaultValueInput: false
+          outgoingConnections:
+            - data->"Code" woz8QGcPH7gI108R87Sip/list_of_jsons_2
+          visualData: 413.89629629629627/1088.3833333333332/330/10//
+        '[1bpzS8e3UKo80xasRuRrS]:graphInput "Graph Input"':
+          data:
+            dataType: object[]
+            defaultValue: ""
+            id: list_of_jsons_1
+            useDefaultValueInput: false
+          outgoingConnections:
+            - data->"Code" woz8QGcPH7gI108R87Sip/list_of_jsons_1
+          visualData: 389.89629629629627/909.3833333333332/330/28//
+        '[AwUAE9YU1j8Q8ZBpDuXwJ]:graphInput "Graph Input"':
+          data:
+            dataType: object
+            id: json_4
+            useDefaultValueInput: false
+          outgoingConnections:
+            - data->"Code" woz8QGcPH7gI108R87Sip/json_4
+          visualData: 369.13600823045266/596.8637174211249/330/21//
+        '[FuUmjDmKcav_GoLWVGY0A]:graphInput "Graph Input"':
+          data:
+            dataType: object[]
+            defaultValue: ""
+            id: list_of_jsons_3
+            useDefaultValueInput: false
+          outgoingConnections:
+            - data->"Code" woz8QGcPH7gI108R87Sip/list_of_jsons_3
+          visualData: 413.89629629629627/1288.3833333333332/330/10//
+        '[NoRBtD24d8wdjNncvUnYk]:graphInput "Graph Input"':
+          data:
+            dataType: object[]
+            defaultValue: ""
+            id: list_of_jsons_4
+            useDefaultValueInput: false
+          outgoingConnections:
+            - data->"Code" woz8QGcPH7gI108R87Sip/list_of_jsons_4
+          visualData: 413.89629629629627/1488.3833333333332/330/10//
+        '[PEutEVU2awGH2y-r8x_Rt]:graphInput "Graph Input"':
+          data:
+            dataType: object
+            id: json_3
+            useDefaultValueInput: false
+          outgoingConnections:
+            - data->"Code" woz8QGcPH7gI108R87Sip/json_3
+          visualData: 374.63175582990397/444.9515089163238/330/20//
+        '[Pm2dlBWe7o7JPi-3P10oo]:graphInput "Graph Input"':
+          data:
+            dataType: object
+            id: json_5
+            useDefaultValueInput: false
+          outgoingConnections:
+            - data->"Code" woz8QGcPH7gI108R87Sip/json_5
+          visualData: 369.13600823045266/747.4019890260631/330/22//
+        '[VruB3e5eBVokizn5zhSky]:graphOutput "Graph Output"':
+          data:
+            dataType: object
+            id: final_ai_reasons_json
+          visualData: 1533.866392318244/742.645061728395/330/13//
+        '[nh4GwY7cwom0oybaL0uJ5]:graphInput "Graph Input"':
+          data:
+            dataType: object
+            id: json_7
+            useDefaultValueInput: false
+          outgoingConnections:
+            - data->"Code" woz8QGcPH7gI108R87Sip/json_7
+          visualData: -58.86399176954734/285.4019890260631/330/30//
+        '[obvC_dmpXU8JtfPVFrcNn]:graphInput "Graph Input"':
+          data:
+            dataType: object
+            id: json_6
+            useDefaultValueInput: false
+          outgoingConnections:
+            - data->"Code" woz8QGcPH7gI108R87Sip/json_6
+          visualData: -58.86399176954734/146.40198902606312/330/29//
+        '[ph_P93R5I3WzdN8WLovV_]:graphInput "Graph Input"':
+          data:
+            dataType: object
+            id: json_2
+            useDefaultValueInput: false
+          outgoingConnections:
+            - data->"Code" woz8QGcPH7gI108R87Sip/json_2
+          visualData: 373.35411522633746/279.21550068587106/330/24//
+        '[ptT2qFJExMEWIfWrnRzYC]:graphInput "Graph Input"':
+          data:
+            dataType: object
+            defaultValue: ""
+            id: json_1
+            useDefaultValueInput: false
+          outgoingConnections:
+            - data->"Code" woz8QGcPH7gI108R87Sip/json_1
+          visualData: 437.832853223594/122.08518518518521/330/18//
+        '[qgsDzksN0-hJ2ItV06HBr]:graphInput "Graph Input"':
+          data:
+            dataType: object
+            id: json_9
+            useDefaultValueInput: false
+          outgoingConnections:
+            - data->"Code" woz8QGcPH7gI108R87Sip/json_9
+          visualData: -61.86399176954734/580.4019890260631/330/32//
+        '[wXobYiH2-nJlRlKqEb1lM]:graphInput "Graph Input"':
+          data:
+            dataType: object
+            id: json_8
+            useDefaultValueInput: false
+          outgoingConnections:
+            - data->"Code" woz8QGcPH7gI108R87Sip/json_8
+          visualData: -61.86399176954734/424.4019890260631/330/31//
+        '[woz8QGcPH7gI108R87Sip]:code "Code"':
+          data:
+            code: >-
+              let list_of_inputs = [
+                  inputs.json_1.value,
+                  inputs.json_2.value,
+                  inputs.json_3.value,
+                  inputs.json_4.value,
+                  inputs.json_5.value,
+                  inputs.json_6.value,
+                  inputs.json_7.value,
+                  inputs.json_8.value,
+                  inputs.json_9.value,
+                  inputs.list_of_jsons_1.value,
+                  inputs.list_of_jsons_2.value,
+                  inputs.list_of_jsons_3.value,
+                  inputs.list_of_jsons_4.value
+              ]
+
+
+              function numerate_dict_keys(dict_info, number) {
+                  const numerated_dict = {};
+                  for (const key in dict_info) {
+                      numerated_dict[`${key}${number}`] = dict_info[key];
+                  }
+                  return numerated_dict;
+              }
+
+              let final_ai_reasons_json_dict = {}
+
+
+
+              for (let i = 0; i < list_of_inputs.length; i++) {
+                  node_output = list_of_inputs[i]
+                  if (node_output !== undefined) {
+                      first_element_of_node_output = node_output[0]
+                      if (typeof (first_element_of_node_output) !== "object") {
+                          for (const key in node_output) {
+                              final_ai_reasons_json_dict[key] = node_output[key];
+                          }
+                      }
+                      else {
+
+
+                          for (let j = 0; j < node_output.length; j++) {
+                              list_of_jsons = node_output[j]
+                              let numerated_desired_items_list = numerate_dict_keys(list_of_jsons, j + 1)
+                              for (const key in numerated_desired_items_list) {
+                                  final_ai_reasons_json_dict[key] = numerated_desired_items_list[key];
+                              }
+                          }
+
+                      }
+                  }
+              }
+
+
+
+
+              return {
+                final_ai_reasons_json: {
+                  type: typeof(final_ai_reasons_json_dict),
+                  value: final_ai_reasons_json_dict
+                }
+              };
+            inputNames:
+              - json_1
+              - json_2
+              - json_3
+              - json_4
+              - json_5
+              - json_6
+              - json_7
+              - json_8
+              - json_9
+              - list_of_jsons_1
+              - list_of_jsons_2
+              - list_of_jsons_3
+              - list_of_jsons_4
+            outputNames:
+              - final_ai_reasons_json
+          outgoingConnections:
+            - final_ai_reasons_json->"Graph Output" VruB3e5eBVokizn5zhSky/value
+          visualData: 1150.8624828532236/549.6745541838134/230/11//
+    No4XBpiQKMTWMDJ-0Cwpy:
+      metadata:
+        description: ""
+        id: No4XBpiQKMTWMDJ-0Cwpy
+        name: TrimPrompt
+      nodes:
+        '[4hA6lO9qOn5A0F6KP6-ls]:subGraph "Subgraph"':
+          data:
+            graphId: k0HWnuSssHo77oxIe13DD
+            useAsGraphPartialOutput: false
+            useErrorOutput: false
+          outgoingConnections:
+            - output->"Code" bSGheCy8beG2_68AyXT3D/prompt_token_size
+          visualData: 754.7892237645166/269.96423731092835/330/31//
+        '[E5RzYwAiCG2JvzunldySw]:graphOutput "Graph Output"':
+          data:
+            dataType: string
+            id: prompt_text_with_entry
+          visualData: 1868.504798820617/447.5830368749581/330/29//
+        '[aKaIZZfy-CotKPoIeoiUQ]:graphInput "Graph Input"':
+          data:
+            dataType: string
+            id: entry_text
+            useDefaultValueInput: false
+          outgoingConnections:
+            - data->"Code" bSGheCy8beG2_68AyXT3D/entry_text
+            - data->"Subgraph" hx-L-OLtdGZLRYwOt6CYo/text
+          visualData: 203.99074715579488/647.6939740861047/330/26//
+        '[bSGheCy8beG2_68AyXT3D]:code "Code"':
+          data:
+            code: >
+              // This functions sums the prompt and entry text tokens quantity
+
+
+              // INPUTS
+
+              let prompt_text = inputs.prompt_text.value;
+
+              let entry_text = inputs.entry_text.value;
+
+              let prompt_token_size = inputs.prompt_token_size.value;
+
+              let entry_token_size = inputs.entry_token_size.value;
+
+              let max_tokens = inputs.max_tokens.value;
+
+              let model = inputs.model.value;
+
+
+              // CONSTANTS
+
+              const entry_pattern = /<<([^>]+)>>/;
+
+              const correctionFactor = 0.8
+
+              const modelsTokenLimitDict = {
+                  "gpt-4-1106-preview": parseInt(128000 * correctionFactor),
+                  "gpt-4": parseInt(8192 * correctionFactor),
+                  "claude-2": parseInt(100000 * correctionFactor),
+                  "gpt-3.5-turbo-16k": parseInt(16385 * correctionFactor),
+              };
+
+
+              let total_token_sum = prompt_token_size + entry_token_size + max_tokens
+
+
+              if (total_token_sum > modelsTokenLimitDict[model]) {
+                let difference_in_tokens = total_token_sum - modelsTokenLimitDict[model]
+                let difference_in_text_length = difference_in_tokens * 4
+                if (difference_in_text_length > (entry_text.length)) {
+                  difference_in_text_length = difference_in_tokens * 3
+                }
+                entry_text = entry_text.slice(0, -difference_in_text_length)
+              } 
+
+
+              prompt_with_replace = prompt_text.replace(entry_pattern, entry_text)
+
+
+              return {
+                  output1: {
+                    type: 'string',
+                    value: prompt_with_replace
+                  },
+                  token_limit: {
+                    type: 'number',
+                    value: modelsTokenLimitDict[model]
+                  }
+                };
+            inputNames:
+              - prompt_text
+              - entry_text
+              - prompt_token_size
+              - entry_token_size
+              - max_tokens
+              - model
+            outputNames:
+              - output1
+              - token_limit
+          outgoingConnections:
+            - output1->"Graph Output" E5RzYwAiCG2JvzunldySw/value
+          visualData: 1232.0725210575772/330.23097789782946/393.22101351278/28//
+        '[dN9_DXNpY6F9HcXBhOtOy]:graphInput "Graph Input"':
+          data:
+            dataType: number
+            id: max_tokens
+            useDefaultValueInput: false
+          outgoingConnections:
+            - data->"Code" bSGheCy8beG2_68AyXT3D/max_tokens
+          visualData: 672.6145553413895/786.3459603133/330/16//
+        '[gO8JEC7OaE9ZN78Xg3KFU]:graphInput "Graph Input"':
+          data:
+            dataType: string
+            id: promp_text
+            useDefaultValueInput: false
+          outgoingConnections:
+            - data->"Code" bSGheCy8beG2_68AyXT3D/prompt_text
+            - data->"Subgraph" 4hA6lO9qOn5A0F6KP6-ls/text
+          visualData: 288.8313945381036/342.9982573568215/330/24//
+        '[hx-L-OLtdGZLRYwOt6CYo]:subGraph "Subgraph"':
+          data:
+            graphId: k0HWnuSssHo77oxIe13DD
+            useAsGraphPartialOutput: false
+            useErrorOutput: false
+          outgoingConnections:
+            - output->"Code" bSGheCy8beG2_68AyXT3D/entry_token_size
+          visualData: 613.1728698194144/560.9120269363775/330/25//
+        '[uyj8e8FCbGOqPhldBVk7Z]:graphInput "Graph Input"':
+          data:
+            dataType: string
+            id: model
+            useDefaultValueInput: false
+          outgoingConnections:
+            - data->"Code" bSGheCy8beG2_68AyXT3D/model
+          visualData: 669.0738015148012/1024.7090088471368/330/30//
+    VBfwPp3tXdEmMiB6_sXzD:
+      metadata:
+        description: ""
+        id: VBfwPp3tXdEmMiB6_sXzD
+        name: DeployTemplateNameAndSubgraph
+      nodes:
+        '[-qUQHc4IN-aD399iZFO7_]:text "Get TemplateId By Name"':
+          data:
+            text: "{{base_api_url}}/template-id-from-name"
+          outgoingConnections:
+            - output->"API CALL- GET TEMPLATEID BY NAME"
+              OB-3rHEDcVGO96UtMqecU/url
+          visualData: 233/719/330/12//
+        '[1YMj3H7yPXVrj_OzRK_8i]:getGlobal "Get Global"':
+          data:
+            dataType: string
+            id: rivet_project_file_name
+            onDemand: false
+            useIdInput: false
+            wait: true
+          outgoingConnections:
+            - value->"If" OLPU-gcaOVGEHDcM-bdTp/value
+          visualData: -800.8247563162075/1683.4281267046774/230/332//
+        '[1sbmsaD5JjVzc83rEEzC5]:text "Headers - Create Prompt"':
+          data:
+            text: |-
+              {
+                "template_id": "{{template_id}}",
+                "prompt_group_name": "{{prompt_group_name}}",
+                "engine": "{{engine}}",
+                "model": "{{model}}",
+                "temperature": "{{temperature}}",
+                "top_p": "{{top_p}}",
+                "max_tokens": "{{max_tokens}}",
+                "system_role": "{{system_role}}",
+                "rivet_project_s3_path": "{{rivet_project_s3_path}}",
+                "rivet_graph_name": "{{rivet_graph_name}}",
+                "Content-Type": "text/plain",
+                "Authorization": "{{authorization}}"
+              }
+          outgoingConnections:
+            - output->"API CALL- CREATE PROMPT" KrrYfSpgD7ekZyU1Etmta/headers
+          visualData: 1745/1599/330/37//
+        '[2fzam2l5PLsoUIDnB68Ku]:text "Backoffice - Base API URL"':
+          data:
+            text: https://backoffice.talismanai.co
+          outgoingConnections:
+            - output->"Create/Update Prompt" P5_ai97jCAACPa4by5ZeW/base_api_url
+            - output->"Get TemplateId By Name" -qUQHc4IN-aD399iZFO7_/base_api_url
+            - output->"Upload Rivet Project to S3"
+              KmNS5D0_Z3l6iPOi9icqg/base_api_url
+          visualData: -200/691/330/17//
+        '[3Nyw_z28AjMgsmQJ_LnBi]:extractObjectPath "Extract Object Path"':
+          data:
+            path: $.template_id
+            usePathInput: false
+          outgoingConnections:
+            - match->"Headers - Create Prompt" 1sbmsaD5JjVzc83rEEzC5/template_id
+          visualData: 1447/904/280/22//
+        '[3ot3n0IxQCXakyA07tXug]:ifElse "If/Else"':
+          data:
+            unconnectedControlFlowExcluded: true
+          visualData: -424/1701/205/null//
+        '[7lntd5mMhSJDKoNNygDl7]:getGlobal "Global - Temperature"':
+          data:
+            dataType: any
+            id: temperature
+            onDemand: false
+            useIdInput: false
+            wait: true
+          outgoingConnections:
+            - value->"Headers - Create Prompt" 1sbmsaD5JjVzc83rEEzC5/temperature
+          visualData: 898/1812/230/255//
+        '[8QM3LOf9PhxR6TsSXJFRS]:text "Dummy Body Rivet Graph Prompt"':
+          data:
+            text: |-
+              Rivet Graph
+
+              >>template<<"dummy_json_template":string
+          outgoingConnections:
+            - output->"API CALL- CREATE PROMPT" KrrYfSpgD7ekZyU1Etmta/req_body
+          visualData: 2429.6565148971195/1723.2336329218108/330/321//
+        '[AfKBwfMCgfWHiiPVqvLUe]:getGlobal "Get Global"':
+          data:
+            dataType: string
+            id: template_name
+            onDemand: false
+            useIdInput: false
+            wait: true
+          outgoingConnections:
+            - value->"If" zsBFtbd9Xwr5YNUsuBOnJ/value
+          visualData: -1386.4592156478993/561.4595027438259/230/331//
+        '[CWQvxx8D1qcVh_XhebpCb]:object "Headers Auth"':
+          data:
+            jsonTemplate: |-
+              {
+                "Content-Type": "text/plain",
+                "Authorization": "{{auth_token}}"
+              }
+          outgoingConnections:
+            - output->"API CALL- GET TEMPLATEID BY NAME"
+              OB-3rHEDcVGO96UtMqecU/headers
+            - output->"API CALL- UPLOAD RIVET PROJECT TO S3"
+              PhIuLXlWS-S1luwv-T9W3/headers
+            - output->"Extract Object Path" m190e98AhL7wN5UJIIFkE/object
+          visualData: -492/543/230/323//
+        '[HNpYI-lWhgdH83hhS0fnh]:extractObjectPath "Extract Object Path"':
+          data:
+            path: $.path
+            usePathInput: false
+          outgoingConnections:
+            - match->"Headers - Create Prompt"
+              1sbmsaD5JjVzc83rEEzC5/rivet_project_s3_path
+          visualData: 1795/1400/280/34//
+        '[JSDyQgkFfSKHhEFs5gRm2]:extractJson "Extract JSON"':
+          outgoingConnections:
+            - output->"Extract Object Path" 3Nyw_z28AjMgsmQJ_LnBi/object
+          visualData: 1099/944/280/23//
+        '[KTd5BXo5s7WJCfRGrStCQ]:getGlobal "Global - Top P"':
+          data:
+            dataType: any
+            id: top_p
+            onDemand: false
+            useIdInput: false
+            wait: true
+          outgoingConnections:
+            - value->"Headers - Create Prompt" 1sbmsaD5JjVzc83rEEzC5/top_p
+          visualData: 901/2224/230/289//
+        '[KmNS5D0_Z3l6iPOi9icqg]:text "Upload Rivet Project to S3"':
+          data:
+            text: "{{base_api_url}}/upload-rivet-project-to-s3"
+          outgoingConnections:
+            - output->"API CALL- UPLOAD RIVET PROJECT TO S3"
+              PhIuLXlWS-S1luwv-T9W3/url
+          visualData: 553/1227/330/52//
+        '[KrrYfSpgD7ekZyU1Etmta]:httpCall "API CALL- CREATE PROMPT"':
+          data:
+            body: ""
+            errorOnNon200: true
+            headers: ""
+            method: POST
+            url: ""
+            useBodyInput: true
+            useHeadersInput: true
+            useUrlInput: true
+          outgoingConnections:
+            - res_body->"If/Else" xoF9FGaSpU79K4oAK835D/true
+          visualData: 2341.1111111111113/1231.7777777777778/280/38//
+        '[NIVBioBOV9dWjmO0bpyPv]:getGlobal "Global - Model Name"':
+          data:
+            dataType: string
+            id: model_name
+            onDemand: false
+            useIdInput: false
+            wait: true
+          outgoingConnections:
+            - value->"Compare" fywYLAj_waj20lE-PRaJk/a
+            - value->"Headers - Create Prompt" 1sbmsaD5JjVzc83rEEzC5/model
+          visualData: -213/2014/230/303//
+        '[NrbZzX1WqnHVDTh2qdU_2]:extractJson "Extract JSON"':
+          outgoingConnections:
+            - output->"Extract Object Path" HNpYI-lWhgdH83hhS0fnh/object
+          visualData: 1455/1399/280/33//
+        '[OB-3rHEDcVGO96UtMqecU]:httpCall "API CALL- GET TEMPLATEID BY NAME"':
+          data:
+            body: ""
+            errorOnNon200: true
+            headers: ""
+            method: POST
+            url: ""
+            useBodyInput: true
+            useHeadersInput: true
+            useUrlInput: true
+          outgoingConnections:
+            - res_body->"Extract JSON" JSDyQgkFfSKHhEFs5gRm2/input
+          visualData: 714/844/280/null//
+        '[OLPU-gcaOVGEHDcM-bdTp]:if "If"':
+          data:
+            unconnectedControlFlowExcluded: true
+          outgoingConnections:
+            - output->"Headers - Create Prompt"
+              1sbmsaD5JjVzc83rEEzC5/prompt_group_name
+            - output->"Upload Rivet Project to S3 Payload"
+              VFRDxpzz3DI2q-26gGQZe/rivet_project_file_name
+          visualData: -75.96030156378652/1699.9064190946501/155/null//
+        '[P5_ai97jCAACPa4by5ZeW]:text "Create/Update Prompt"':
+          data:
+            text: "{{base_api_url}}/prompt"
+          outgoingConnections:
+            - output->"API CALL- CREATE PROMPT" KrrYfSpgD7ekZyU1Etmta/url
+          visualData: 1756/1201.6666666666667/330/39//
+        '[PWLOFYAvrMGNAbK5iGQSB]:graphOutput "Graph Output"':
+          data:
+            dataType: string
+            id: output
+          visualData: 3198/1297/330/null//
+        '[PhIuLXlWS-S1luwv-T9W3]:httpCall "API CALL- UPLOAD RIVET PROJECT TO S3"':
+          data:
+            body: ""
+            errorOnNon200: true
+            headers: ""
+            method: POST
+            url: ""
+            useBodyInput: true
+            useHeadersInput: true
+            useUrlInput: true
+          outgoingConnections:
+            - res_body->"Extract JSON" NrbZzX1WqnHVDTh2qdU_2/input
+          visualData: 1028/1345/280/51//
+        '[QY1s4zZ6PMEsNVPu9Hs5P]:getGlobal "Global - Max Tokens"':
+          data:
+            dataType: any
+            id: max_tokens
+            onDemand: false
+            useIdInput: false
+            wait: true
+          outgoingConnections:
+            - value->"Headers - Create Prompt" 1sbmsaD5JjVzc83rEEzC5/max_tokens
+          visualData: 898/2404/230/292//
+        '[QdxPzaFvTu2f3E9DNMO-X]:getGlobal "Get Global"':
+          data:
+            dataType: string
+            id: backoffice_user_password
+            onDemand: false
+            useIdInput: false
+            wait: true
+          outgoingConnections:
+            - value->"Code" _VjbaAnKngTINcRZBum5H/backoffice_user_password
+          visualData: -1386.4592156478993/361.4595027438259/230/331//
+        '[Re2CGu4B8XHrkV4f_Hanm]:getGlobal "Get Global"':
+          data:
+            dataType: string
+            id: backoffice_user_email
+            onDemand: false
+            useIdInput: false
+            wait: true
+          outgoingConnections:
+            - value->"Code" _VjbaAnKngTINcRZBum5H/backoffice_user_email
+          visualData: -1166.2788181472245/135.35564118446752/230/330//
+        '[U-7z7gVYzYEeq-Lg1XS8c]:text "claude-2"':
+          data:
+            text: claude-2
+          outgoingConnections:
+            - output->"Compare" fywYLAj_waj20lE-PRaJk/b
+          visualData: -386/1886/330/304//
+        '[VFRDxpzz3DI2q-26gGQZe]:object "Upload Rivet Project to S3 Payload"':
+          data:
+            jsonTemplate: |-
+              {
+                "rivet_project_file_content": "{{rivet_project_file_content}}",
+                "rivet_project_file_name": "{{rivet_project_file_name}}"
+              }
+          outgoingConnections:
+            - output->"API CALL- UPLOAD RIVET PROJECT TO S3"
+              PhIuLXlWS-S1luwv-T9W3/req_body
+          visualData: 566/1431/230/53//
+        '[WLzdVbuF_JC7_D_883Axm]:graphInput "Deploy"':
+          data:
+            dataType: boolean
+            id: deploy
+            useDefaultValueInput: false
+          outgoingConnections:
+            - data->"If" OLPU-gcaOVGEHDcM-bdTp/if
+            - data->"If" w-3MQdvsDtSC7lvVfpS-G/if
+            - data->"If" zsBFtbd9Xwr5YNUsuBOnJ/if
+            - data->"If/Else" xoF9FGaSpU79K4oAK835D/if
+          visualData: -991/905/330/333//
+        '[X4xeu1TKozYb5hUSH_W7M]:text "openai"':
+          data:
+            text: openai
+          outgoingConnections:
+            - output->"Model Engine" hnvR2MiDSp7M5djmO6GRY/false
+          visualData: 23/2396/330/307//
+        '[_VjbaAnKngTINcRZBum5H]:code "Code"':
+          data:
+            code: >-
+              // This is a code node, you can write and JS in here and it will
+              be executed.
+
+              // Inputs are accessible via an object `inputs` and data is typed (i.e. inputs.foo.type, inputs.foo.value)
+
+              // Return an object with named outputs that match the output names specified in the node's config.
+
+              // Output values must by typed as well (e.g. { bar: { type: 'string', value: 'bar' } }
+
+              return {
+                auth_token: {
+                  type: "string",
+                  value: "Bearer "+ btoa(inputs.backoffice_user_email.value + ":" + inputs.backoffice_user_password.value)
+                }
+              };
+            inputNames:
+              - backoffice_user_email
+              - backoffice_user_password
+            outputNames:
+              - auth_token
+          outgoingConnections:
+            - auth_token->"Headers Auth" CWQvxx8D1qcVh_XhebpCb/auth_token
+          visualData: -853.0324794349242/322.6224741102993/230/null//
+        '[emED-dpUXaOWv-Y7v6KIE]:getGlobal "Global - Rivet Graph Name"':
+          data:
+            dataType: any
+            id: rivet_graph_name
+            onDemand: false
+            useIdInput: false
+            wait: true
+          outgoingConnections:
+            - value->"Headers - Create Prompt"
+              1sbmsaD5JjVzc83rEEzC5/rivet_graph_name
+          visualData: 901.2850449382717/2871.137837037037/230/322//
+        '[fywYLAj_waj20lE-PRaJk]:compare "Compare"':
+          data:
+            comparisonFunction: ==
+          outgoingConnections:
+            - output->"Model Engine" hnvR2MiDSp7M5djmO6GRY/if
+          visualData: 190/1860/190/297//
+        '[hnvR2MiDSp7M5djmO6GRY]:ifElse "Model Engine"':
+          data:
+            unconnectedControlFlowExcluded: true
+          outgoingConnections:
+            - output->"Headers - Create Prompt" 1sbmsaD5JjVzc83rEEzC5/engine
+          visualData: 519/1866/205/296//
+        '[if3ZN-so-aM4f5QE8ntyD]:text "anthropic"':
+          data:
+            text: anthropic
+          outgoingConnections:
+            - output->"Model Engine" hnvR2MiDSp7M5djmO6GRY/true
+          visualData: 17/2256/330/306//
+        '[m190e98AhL7wN5UJIIFkE]:extractObjectPath "Extract Object Path"':
+          data:
+            path: $.Authorization
+            usePathInput: false
+          outgoingConnections:
+            - match->"Headers - Create Prompt"
+              1sbmsaD5JjVzc83rEEzC5/authorization
+          visualData: -563/1139/280/null//
+        '[rgY_KTkClMjjS0au5zdCe]:getGlobal "Global - System Role"':
+          data:
+            dataType: string
+            id: system_role
+            onDemand: false
+            useIdInput: false
+            wait: true
+          outgoingConnections:
+            - value->"Headers - Create Prompt" 1sbmsaD5JjVzc83rEEzC5/system_role
+          visualData: 896/2607/230/291//
+        '[rpCkWI3jJNa3OPvIy4_8d]:object "Get Template Id by Name Payload"':
+          data:
+            jsonTemplate: |-
+              {
+                "template_name": "{{template_name}}"
+              }
+          outgoingConnections:
+            - output->"API CALL- GET TEMPLATEID BY NAME"
+              OB-3rHEDcVGO96UtMqecU/req_body
+          visualData: 178/882/230/309//
+        '[vBSIWsbnQUd5OzR7NzzHu]:getGlobal "Get Global"':
+          data:
+            dataType: string
+            id: rivet_project_file_content
+            onDemand: false
+            useIdInput: false
+            wait: true
+          outgoingConnections:
+            - value->"If" w-3MQdvsDtSC7lvVfpS-G/value
+          visualData: -940.4236681336458/1436.0089171420632/230/null//
+        '[w-3MQdvsDtSC7lvVfpS-G]:if "If"':
+          data:
+            unconnectedControlFlowExcluded: true
+          outgoingConnections:
+            - output->"Upload Rivet Project to S3 Payload"
+              VFRDxpzz3DI2q-26gGQZe/rivet_project_file_content
+          visualData: -23.70805465020578/1465.7849810699588/155/318//
+        '[xoF9FGaSpU79K4oAK835D]:ifElse "If/Else"':
+          data:
+            unconnectedControlFlowExcluded: true
+          outgoingConnections:
+            - output->"Graph Output" PWLOFYAvrMGNAbK5iGQSB/value
+          visualData: 2814.139541069959/1310.5093069958848/205/313//
+        '[zsBFtbd9Xwr5YNUsuBOnJ]:if "If"':
+          data:
+            unconnectedControlFlowExcluded: true
+          outgoingConnections:
+            - output->"Get Template Id by Name Payload"
+              rpCkWI3jJNa3OPvIy4_8d/template_name
+          visualData: -536/962/155/311//
+        '[zzTIoTTmRBUaaFT-5wAFp]:object "Object"':
+          data:
+            jsonTemplate: |-
+              {
+                "message": "Deploy not run because deploy is marked as False"
+              }
+          outgoingConnections:
+            - output->"If/Else" xoF9FGaSpU79K4oAK835D/false
+          visualData: 2449.5975637860065/986.0117135802469/230/314//
+    blT81coO59bxyTo9Vdut5:
+      metadata:
+        description: ""
+        id: blT81coO59bxyTo9Vdut5
+        name: ChatWithFunctions v2
+      nodes:
+        '[1sBJZFc6h8HN5zks9PsjP]:text "Text"':
+          data:
+            text: "{{input}}"
+          visualData: -258.70874882222324/-1755.1965208751526/330/317//
+        '[2CsKi4TB9hIzawnyoqFEa]:graphOutput "Graph Output"':
+          data:
+            dataType: object
+            id: functions_response
+          isSplitRun: true
+          splitRunMax: 10
+          visualData: 973.1583243663404/-1232.046930028492/330/304//
+        '[2SQBKURczh60hJ3CsPzXP]:ifElse "If/Else"':
+          data:
+            unconnectedControlFlowExcluded: true
+          outgoingConnections:
+            - output->"Chat (Anthropic)" bOK5FNpVBNDPj_BKFja91/maxTokens
+            - output->"Chat" qg26eTTGkVyYO5j_8GA6t/maxTokens
+            - output->"Subgraph" 64_kuxyIQCSN01drwfECE/max_tokens
+            - output->"Subgraph" zcAqNUSgZcSk_GmUUpXjT/max_tokens
+          visualData: -900.8762117766144/-2402.029821916078/205/351//
+        '[64_kuxyIQCSN01drwfECE]:subGraph "Subgraph"':
+          data:
+            graphId: No4XBpiQKMTWMDJ-0Cwpy
+            useAsGraphPartialOutput: false
+            useErrorOutput: false
+          outgoingConnections:
+            - prompt_text_with_entry->"Code" kgULFZxlKZKq-Gg0_NRhZ/raw_prompt
+          visualData: -1971.1455358784149/-1573.716433729558/330/320//
+        '[8YDd5uaKoLo09IHUwVnr7]:getGlobal "Global - Model Name"':
+          data:
+            dataType: string
+            id: model_name
+            onDemand: false
+            useIdInput: false
+            wait: true
+          outgoingConnections:
+            - value->"If/Else" qZBy4Vq_oltDZYxiNcxGk/false
+          visualData: -1414.725367240582/-1477.89880591378/230/329//
+        '[8q5cv8FdeBCWeYOxbHZMh]:graphInput "Graph Input"':
+          data:
+            dataType: string
+            id: model_name
+            useDefaultValueInput: false
+          outgoingConnections:
+            - data->"If/Else" qZBy4Vq_oltDZYxiNcxGk/if
+            - data->"If/Else" qZBy4Vq_oltDZYxiNcxGk/true
+          visualData: -1515.392362934404/-1201.4050084500354/330/338//
+        '[BTappAsdV52_NqKSZrBOp]:code "Code"':
+          data:
+            code: >-
+              const llmResultString = JSON.stringify(inputs.llm_result.value)
+                
+              let startIndex = llmResultString.indexOf("{");
+
+              let endIndex = llmResultString.lastIndexOf("}");
+
+              let parsedJson = {};
+
+              let entrouNoIf = false;
+
+              let entrouNoException = false;
+
+
+              if (startIndex != -1 && endIndex != -1) {
+                entrouNoIf = true;
+                let jsonStr = llmResultString.slice(startIndex, endIndex + 1);
+                // Attempt to parse the JSON
+                jsonStr = jsonStr.replaceAll('\\n', '\n'); // replace occurrences of \n
+                jsonStr = jsonStr.replaceAll('\\\\n', '\n');
+                jsonStr = jsonStr.replaceAll('\\"', '"'); 
+                jsonStr = jsonStr.replaceAll('\\\\"', '');
+                try {
+                  parsedJson = JSON.parse(jsonStr);
+                } catch (error) {
+                  entrouNoException = true;
+                  parsedJson = {};
+                }
+                return {
+                  output: {
+                    value: parsedJson,
+                    type: 'object'
+                  },
+                  llmResultString: {
+                    value: llmResultString,
+                    type: 'string'
+                  },
+                  jsonStr: {
+                    value: jsonStr,
+                    type: "string"
+                  },
+                  startIndex: {
+                    value: startIndex,
+                    type: "number"
+                  },
+                  endIndex: {
+                    value: endIndex,
+                    type: "number"
+                  },
+                  entrouNoIf: {
+                    value: entrouNoIf,
+                    type: "boolean"
+                  },
+                  entrouNoException: {
+                    value: entrouNoException,
+                    type: "boolean"
+                  }
+                }
+              }
+
+              else {
+                throw new Error("No valid JSON found in the input string.");
+              }
+            inputNames:
+              - llm_result
+            outputNames:
+              - output
+              - llmResultString
+              - jsonStr
+              - startIndex
+              - endIndex
+              - entrouNoIf
+              - entrouNoException
+          outgoingConnections:
+            - output->"If/Else" QoiUQKa2a9J4EE0lTpFJR/false
+          visualData: 20.977412287131678/-1161.5970610124834/303.70337653572324/358//
+        '[Ee1HzlpljImKG9lME3ajZ]:extractObjectPath "Extract Object Path"':
+          data:
+            path: $.arguments
+            usePathInput: false
+          isSplitRun: true
+          outgoingConnections:
+            - match->"If/Else" QoiUQKa2a9J4EE0lTpFJR/true
+            - match->"Text" il6HUVXrfKeTr35GqDCJx/input
+          splitRunMax: 10
+          visualData: -54.59604244572697/-1409.225638175518/280/278//
+        '[F4L-mrQAwfpk_719CqD8c]:graphInput "Graph Input"':
+          data:
+            dataType: string
+            id: input
+            useDefaultValueInput: true
+          outgoingConnections:
+            - data->"Code" XkkuLiJD1UMAbSh2SROF-/raw_prompt
+            - data->"Subgraph" 64_kuxyIQCSN01drwfECE/promp_text
+            - data->"Subgraph" zcAqNUSgZcSk_GmUUpXjT/promp_text
+            - data->"Subgraph" zcAqNUSgZcSk_GmUUpXjT/prompt_text
+          visualData: -2616.779078135069/-1122.3254871991237/330/323//
+        '[GGM--0tvxHFs3p8DVwkTJ]:graphInput "Graph Input"':
+          data:
+            dataType: string
+            id: openai_functions_description
+            useDefaultValueInput: false
+          outgoingConnections:
+            - data->"GPT Function" YeQhJxqYGXyAK57aRHQd8/description
+          visualData: -2157.3695107008743/-293.84888024135785/330/287//
+        '[GQ0IfHDyQgovI1kww1qNp]:graphInput "Graph Input"':
+          data:
+            dataType: string
+            editor: string
+            id: max_tokens
+            useDefaultValueInput: false
+          outgoingConnections:
+            - data->"If/Else" 2SQBKURczh60hJ3CsPzXP/if
+            - data->"If/Else" 2SQBKURczh60hJ3CsPzXP/true
+          visualData: -1413.8807465662464/-2150.367219943806/330/352//
+        '[KhmeNb04d00Xxx_OqgcUG]:graphInput "Graph Input"':
+          data:
+            dataType: string
+            id: entry
+            useDefaultValueInput: false
+          outgoingConnections:
+            - data->"Subgraph" 64_kuxyIQCSN01drwfECE/entry_text
+            - data->"Subgraph" zcAqNUSgZcSk_GmUUpXjT/entry_text
+          visualData: -2620.114638003822/-1397.3201208779965/330/310//
+        '[QoiUQKa2a9J4EE0lTpFJR]:ifElse "If/Else"':
+          data:
+            unconnectedControlFlowExcluded: true
+          isSplitRun: true
+          outgoingConnections:
+            - output->"Graph Output" 2CsKi4TB9hIzawnyoqFEa/value
+          splitRunMax: 10
+          visualData: 513.3080240294961/-1201.1405593302807/205/357//
+        '[VX1TpB2iOESUldFmtDx7p]:getGlobal "Global - System Role"':
+          data:
+            dataType: string
+            id: system_role
+            onDemand: false
+            useIdInput: false
+            wait: true
+          outgoingConnections:
+            - value->"Chat" qg26eTTGkVyYO5j_8GA6t/systemPrompt
+          visualData: -2043.5641973221739/-2777.3634972224672/230/346//
+        '[XkkuLiJD1UMAbSh2SROF-]:code "Code"':
+          data:
+            code: >-
+              // This is a code node, you can write and JS in here and it will
+              be executed.
+
+              // Inputs are accessible via an object `inputs` and data is typed (i.e. inputs.foo.type, inputs.foo.value)
+
+              // Return an object with named outputs that match the output names specified in the node's config.
+
+              // Output values must by typed as well (e.g. { bar: { type: 'string', value: 'bar' } }
+
+              let raw_prompt = inputs.raw_prompt.value
+
+
+              let functionsJson = {}
+
+              functionsJson["type"] = "object"
+
+              functionsJson["properties"] = {}
+
+              functionsJson["required"] = []
+
+              if (raw_prompt.includes(">>list_template<<")) {
+                  functionsJson["properties"]["desired_items_list"] = {
+                      "type": "array",
+                      "items": {
+                          "type": "object",
+                          "required": [],
+                          "properties": {}
+                      }
+                  }
+                  functionsJson["required"].push("desired_items_list")
+                  let listTemplateLines = raw_prompt.split("\n").filter(l => l.includes(">>list_template<<"))
+                  for (let idx = 0; idx < listTemplateLines.length; idx++) {
+                      let templateName = listTemplateLines[idx].match(/"([^']+)"/)[1]
+                      functionsJson["properties"]["desired_items_list"]["items"]["required"].push(templateName)
+                      functionsJson["properties"]["desired_items_list"]["items"]["properties"][templateName] = {
+                          "type": "string"
+                      }
+                  }
+              }
+
+              else if (raw_prompt.includes(">>template<<") || raw_prompt.includes(">>template_no_validation<<")) {
+                  let templateLines = raw_prompt.split("\n").filter(l => l.includes(">>template<<") || l.includes(">>template_no_validation<<"))
+                  for (let idx = 0; idx < templateLines.length; idx++) {
+                      let templateName = templateLines[idx].match(/"([^']+)"/)[1]
+                      functionsJson["properties"][templateName] = {
+                          "type": "string"
+                      }
+                      functionsJson["required"].push(templateName)
+                  }
+              }
+
+
+
+
+              return {
+                openai_functions: {
+                  type: "object",
+                  value: functionsJson
+                }
+              };
+            inputNames:
+              - raw_prompt
+            outputNames:
+              - openai_functions
+          isSplitRun: true
+          outgoingConnections:
+            - openai_functions->"Calculate function tokens"
+              hBnTOuzxCj30U3_mM_9ej/function_object
+            - openai_functions->"GPT Function" YeQhJxqYGXyAK57aRHQd8/schema
+          splitRunMax: 10
+          visualData: -2021.3668227207286/-910.0185862334662/230/353//
+        '[Y2R_ksy-QN-6vBpIF5GQz]:if "If"':
+          data:
+            unconnectedControlFlowExcluded: true
+          isSplitRun: true
+          outgoingConnections:
+            - falseOutput->"Chat (Anthropic)" bOK5FNpVBNDPj_BKFja91/model
+            - output->"Chat" qg26eTTGkVyYO5j_8GA6t/model
+          splitRunMax: 10
+          visualData: -762.9466716133595/-1052.3374657772915/155/331//
+        '[YeQhJxqYGXyAK57aRHQd8]:gptFunction "GPT Function"':
+          data:
+            description: Get information from the bylaws as defined in the functions schema
+            name: get_json
+            schema: |-
+              {
+                "type": "object",
+                "properties": {}
+              }
+            useDescriptionInput: true
+            useNameInput: false
+            useSchemaInput: true
+          isSplitRun: true
+          outgoingConnections:
+            - function->"Chat" qg26eTTGkVyYO5j_8GA6t/functions
+          splitRunMax: 10
+          visualData: -1432.8560067110122/-404.5946774913552/280/297//
+        '[bOK5FNpVBNDPj_BKFja91]:chatAnthropic "Chat (Anthropic)"':
+          data:
+            cache: false
+            maxTokens: 1024
+            model: claude-2
+            stop: ""
+            temperature: 0.5
+            top_p: 1
+            useAsGraphPartialOutput: true
+            useMaxTokensInput: true
+            useModelInput: true
+            useStop: false
+            useStopInput: false
+            useTemperatureInput: true
+            useTopKInput: false
+            useTopP: false
+            useTopPInput: true
+            useUseTopPInput: false
+          isSplitRun: true
+          outgoingConnections:
+            - response->"Code" BTappAsdV52_NqKSZrBOp/llm_result
+          splitRunMax: 10
+          visualData: -426.4938792202811/-984.8836212209395/305/266//
+        '[hBnTOuzxCj30U3_mM_9ej]:code "Calculate function tokens"':
+          data:
+            code: >-
+              // This is a code node, you can write and JS in here and it will
+              be executed.
+
+              // Inputs are accessible via an object `inputs` and data is typed (i.e. inputs.foo.type, inputs.foo.value)
+
+              // Return an object with named outputs that match the output names specified in the node's config.
+
+              // Output values must by typed as well (e.g. { bar: { type: 'string', value: 'bar' } }
+
+              let function_object = inputs.function_object.value
+
+
+              // Convert object to string
+
+              const jsonString = JSON.stringify(function_object);
+
+
+              // Calculate character length
+
+              const characterLength = parseInt(jsonString.length / 4);
+
+
+              return {
+                output1: {
+                  type: 'number',
+                  value: characterLength
+                }
+              };
+            inputNames:
+              - function_object
+            outputNames: output1
+          visualData: -1508.2640739753049/-935.5523869961742/255.93308533375625/296//
+        '[il6HUVXrfKeTr35GqDCJx]:text "Text"':
+          data:
+            text: "{{input}}"
+          visualData: 279.8800333406663/-1636.8126820097466/414.1824091523258/316//
+        '[kgULFZxlKZKq-Gg0_NRhZ]:code "Code"':
+          data:
+            code: >-
+              // This is a code node, you can write and JS in here and it will
+              be executed.
+
+              // Inputs are accessible via an object `inputs` and data is typed (i.e. inputs.foo.type, inputs.foo.value)
+
+              // Return an object with named outputs that match the output names specified in the node's config.
+
+              // Output values must by typed as well (e.g. { bar: { type: 'string', value: 'bar' } }
+
+              return {
+                final_prompt: {
+                  type: 'string',
+                  value: inputs.raw_prompt.value.replace(">>template<<", "").replace(">>list_template<<", "").replace(">>explanation<<","").replace(":string","").replace(":dependency","").replace(":slashed_date","").replace(":currency","").replace(":quantity","").replace(":cpf","").replace(":cnpj","").replace(":no_validation","")
+                }
+              };
+            inputNames:
+              - raw_prompt
+            outputNames:
+              - final_prompt
+          outgoingConnections:
+            - final_prompt->"Chat (Anthropic)" bOK5FNpVBNDPj_BKFja91/prompt
+            - final_prompt->"Chat" qg26eTTGkVyYO5j_8GA6t/prompt
+          visualData: -1795.7049791910379/-1223.5209311381896/230/270//
+        '[nH3rRNO8uqD48IywkKPHA]:getGlobal "Global - Temperature"':
+          data:
+            dataType: any
+            id: temperature
+            onDemand: false
+            useIdInput: false
+            wait: true
+          outgoingConnections:
+            - value->"Chat (Anthropic)" bOK5FNpVBNDPj_BKFja91/temperature
+            - value->"Chat" qg26eTTGkVyYO5j_8GA6t/temperature
+          visualData: -1336.426083281072/-2784.792055219752/230/347//
+        '[nHl2Pu-mWfkTwm2E5aYee]:getGlobal "Global - Max Tokens"':
+          data:
+            dataType: any
+            id: max_tokens
+            onDemand: false
+            useIdInput: false
+            wait: true
+          outgoingConnections:
+            - value->"If/Else" 2SQBKURczh60hJ3CsPzXP/false
+          visualData: -1332.6362708331974/-2474.18763621939/230/349//
+        '[qZBy4Vq_oltDZYxiNcxGk]:ifElse "If/Else"':
+          data:
+            unconnectedControlFlowExcluded: true
+          outgoingConnections:
+            - output->"Subgraph" zcAqNUSgZcSk_GmUUpXjT/model
+          visualData: -1042.8397308378958/-1321.1712108813192/205/337//
+        '[qg26eTTGkVyYO5j_8GA6t]:chat "Chat"':
+          data:
+            cache: false
+            code: ""
+            enableFunctionUse: true
+            frequencyPenalty: 0
+            headers: []
+            maxTokens: 1024
+            model: gpt-3.5-turbo-16k-0613
+            overrideMaxTokens: 128000
+            presencePenalty: 0
+            responseFormat: ""
+            stop: ""
+            temperature: 0.5
+            toolChoice: function
+            toolChoiceFunction: get_json
+            top_p: 1
+            useAsGraphPartialOutput: true
+            useFrequencyPenaltyInput: false
+            useMaxTokensInput: true
+            useModelInput: true
+            usePresencePenaltyInput: false
+            useStop: false
+            useStopInput: false
+            useTemperatureInput: true
+            useTopP: false
+            useTopPInput: true
+            useUseTopPInput: false
+            useUserInput: false
+          isSplitRun: true
+          outgoingConnections:
+            - function-call->"Extract Object Path" Ee1HzlpljImKG9lME3ajZ/object
+            - response->"Text" 1sBJZFc6h8HN5zks9PsjP/input
+          splitRunMax: 10
+          visualData: -427.16693645686104/-1522.07998158314/230/277//
+        '[yTFurinFtkt2IaehP-Rno]:code "Code"':
+          data:
+            code: >-
+              // This is a code node, you can write and JS in here and it will
+              be executed.
+
+              // Inputs are accessible via an object `inputs` and data is typed (i.e. inputs.foo.type, inputs.foo.value)
+
+              // Return an object with named outputs that match the output names specified in the node's config.
+
+              // Output values must by typed as well (e.g. { bar: { type: 'string', value: 'bar' } }
+
+              let is_open_ai = inputs.model_name.value.includes("gpt") ? true : false
+
+
+              return {
+                is_open_ai: {
+                  type: 'boolean',
+                  value: is_open_ai
+                }
+              };
+            inputNames:
+              - model_name
+            outputNames:
+              - is_open_ai
+          isSplitRun: true
+          outgoingConnections:
+            - is_open_ai->"If" Y2R_ksy-QN-6vBpIF5GQz/if
+            - is_open_ai->"If/Else" QoiUQKa2a9J4EE0lTpFJR/if
+          splitRunMax: 10
+          visualData: -1132.3565284747758/-1059.8063969075254/230/330//
+        '[zcAqNUSgZcSk_GmUUpXjT]:subGraph "Subgraph"':
+          data:
+            graphId: iWFa6csewSy4no6oMwbzD
+            useAsGraphPartialOutput: false
+            useErrorOutput: false
+          outgoingConnections:
+            - model->"Code" yTFurinFtkt2IaehP-Rno/model_name
+            - model->"If" Y2R_ksy-QN-6vBpIF5GQz/value
+            - model->"Subgraph" 64_kuxyIQCSN01drwfECE/model
+          visualData: -2205.9427681505094/-1939.5252991355615/330/309//
+        '[zf7-ACnoTs55nIMQh-LA0]:getGlobal "Global - Top P"':
+          data:
+            dataType: any
+            id: top_p
+            onDemand: false
+            useIdInput: false
+            wait: true
+          outgoingConnections:
+            - value->"Chat (Anthropic)" bOK5FNpVBNDPj_BKFja91/top_p
+            - value->"Chat" qg26eTTGkVyYO5j_8GA6t/top_p
+          visualData: -2042.523492877107/-2476.0942642249074/230/350//
+    iWFa6csewSy4no6oMwbzD:
+      metadata:
+        description: ""
+        id: iWFa6csewSy4no6oMwbzD
+        name: CheckModelChange
+      nodes:
+        '[1c4q8hLjOc1K2DiHyeLqt]:graphInput "Graph Input"':
+          data:
+            dataType: string
+            id: entry_text
+            useDefaultValueInput: false
+          outgoingConnections:
+            - data->"Code" YJBQ7VwhEY_kg3nm0jyn3/entry_text
+            - data->"Log Output" 86oIof4IpZ7GkxoS0WQMB/entry
+            - data->"Subgraph" gSQqmgNaq5V-yiK8dOkHD/text
+          visualData: 203.99074715579488/647.6939740861047/330/26//
+        '[1nDEa2WWvh1VucPuNhBhx]:graphOutput "Graph Output"':
+          data:
+            dataType: string
+            id: model
+          outgoingConnections:
+            - valueOutput->"Log Output" 86oIof4IpZ7GkxoS0WQMB/log_text
+            - valueOutput->"Log Output" 86oIof4IpZ7GkxoS0WQMB/model_name
+          visualData: 1844.310966867128/388.1981766254852/330/34//
+        '[3sj-nZ6B6xttUf-fuQBAT]:subGraph "Subgraph"':
+          data:
+            graphId: k0HWnuSssHo77oxIe13DD
+            useAsGraphPartialOutput: false
+            useErrorOutput: false
+          outgoingConnections:
+            - output->"Code" YJBQ7VwhEY_kg3nm0jyn3/prompt_token_size
+          visualData: 754.7892237645166/269.96423731092835/330/31//
+        '[86oIof4IpZ7GkxoS0WQMB]:subGraph "Log Output"':
+          data:
+            graphId: AyQeZ4we5T_SGin85M5XS
+            useAsGraphPartialOutput: false
+            useErrorOutput: false
+          visualData: 2310/412/330/35//
+        '[9ir98PprpwemZj4LDTBKG]:graphInput "Graph Input"':
+          data:
+            dataType: string
+            id: model
+            useDefaultValueInput: false
+          outgoingConnections:
+            - data->"Code" YJBQ7VwhEY_kg3nm0jyn3/model
+          visualData: 669.0738015148012/1024.7090088471368/330/30//
+        '[STJsByCUqEVfcpZezC3JV]:graphInput "Graph Input"':
+          data:
+            dataType: string
+            id: prompt_text
+            useDefaultValueInput: false
+          outgoingConnections:
+            - data->"Code" YJBQ7VwhEY_kg3nm0jyn3/prompt_text
+            - data->"Log Output" 86oIof4IpZ7GkxoS0WQMB/prompt_text
+            - data->"Subgraph" 3sj-nZ6B6xttUf-fuQBAT/text
+          visualData: 288.8313945381036/342.9982573568215/330/24//
+        '[TGmDJGKqR8HvjuFNrS6kS]:graphInput "Graph Input"':
+          data:
+            dataType: number
+            id: max_tokens
+            useDefaultValueInput: false
+          outgoingConnections:
+            - data->"Code" YJBQ7VwhEY_kg3nm0jyn3/max_tokens
+          visualData: 672.6145553413895/786.3459603133/330/16//
+        '[YJBQ7VwhEY_kg3nm0jyn3]:code "Code"':
+          data:
+            code: >
+              // This functions sums the prompt and entry text tokens quantity
+
+
+              // INPUTS
+
+              let prompt_text = inputs.prompt_text.value;
+
+              let entry_text = inputs.entry_text.value;
+
+              let prompt_token_size = inputs.prompt_token_size.value;
+
+              let entry_token_size = inputs.entry_token_size.value;
+
+              let max_tokens = inputs.max_tokens.value;
+
+              let model = inputs.model.value;
+
+              let force_model_change = inputs.force_model_change.value;
+
+
+              // CONSTANTS
+
+              const entry_pattern = /<<([^>]+)>>/;
+
+              const correctionFactor = 0.8
+
+              const modelsTokenLimitDict = {
+                  "gpt-4-1106-preview": parseInt(128000 * correctionFactor),
+                  "gpt-4": parseInt(8192 * correctionFactor),
+                  "claude-2": parseInt(100000 * correctionFactor),
+                  "gpt-3.5-turbo-16k": parseInt(16385 * correctionFactor),
+              };
+
+
+              let total_token_sum = prompt_token_size + entry_token_size + max_tokens
+
+
+              if (force_model_change == "false" && (
+                  (model === "gpt-4" && total_token_sum > modelsTokenLimitDict["gpt-4"]) ||
+                  (model === "gpt-4-1106-preview" && total_token_sum > modelsTokenLimitDict["gpt-4-1106-preview"]) ||
+                  (model === "gpt-3.5-turbo-16k" && total_token_sum > modelsTokenLimitDict["gpt-3.5-turbo-16k"])
+              )) {
+                  model = "claude-2";
+              }
+
+
+
+              prompt_with_replace = prompt_text.replace(entry_pattern, entry_text)
+
+
+              return {
+                  model: {
+                    type: 'string',
+                    value: model
+                  },
+                  token_limit: {
+                    type: 'number',
+                    value: modelsTokenLimitDict[model]
+                  }
+                };
+            inputNames:
+              - prompt_text
+              - entry_text
+              - prompt_token_size
+              - entry_token_size
+              - max_tokens
+              - model
+              - force_model_change
+            outputNames:
+              - model
+              - token_limit
+          outgoingConnections:
+            - model->"Graph Output" 1nDEa2WWvh1VucPuNhBhx/value
+          visualData: 1232.0725210575772/330.23097789782946/393.22101351278/28//
+        '[gSQqmgNaq5V-yiK8dOkHD]:subGraph "Subgraph"':
+          data:
+            graphId: k0HWnuSssHo77oxIe13DD
+            useAsGraphPartialOutput: false
+            useErrorOutput: false
+          outgoingConnections:
+            - output->"Code" YJBQ7VwhEY_kg3nm0jyn3/entry_token_size
+          visualData: 613.1728698194144/560.9120269363775/330/25//
+        '[neUn7TJQUPbKwZCwtdokL]:getGlobal "Get Global"':
+          data:
+            code: ""
+            dataType: boolean
+            id: force_model_change
+            onDemand: false
+            useIdInput: false
+            wait: true
+          outgoingConnections:
+            - value->"Code" YJBQ7VwhEY_kg3nm0jyn3/force_model_change
+          visualData: 835.6080735204889/1204.8932886117398/230/33//
+    k0HWnuSssHo77oxIe13DD:
+      metadata:
+        description: ""
+        id: k0HWnuSssHo77oxIe13DD
+        name: getTextTokenSize
+      nodes:
+        '[Ai5zUVcMWDPMviXnP9idx]:prompt "Prompt"':
+          data:
+            computeTokenCount: true
+            enableFunctionCall: false
+            promptText: "{{input}}"
+            type: user
+            useTypeInput: false
+          outgoingConnections:
+            - tokenCount->"Graph Output" l6N_FTumGBffUnY_YWusx/value
+          visualData: 901.5877453896491/349.64961332540156/280/7//
+        '[ar5CDcmt7BY-ar27mWdca]:graphInput "Graph Input"':
+          data:
+            dataType: string
+            id: text
+            useDefaultValueInput: false
+          outgoingConnections:
+            - data->"Prompt" Ai5zUVcMWDPMviXnP9idx/input
+          visualData: 439/325/330/2//
+        '[l6N_FTumGBffUnY_YWusx]:graphOutput "Graph Output"':
+          data:
+            dataType: number
+            id: output
+          visualData: 1370.8322427126711/360.1195716835217/330/4//
+    oy4gSk9dfV4Rlc86I22Tx:
+      metadata:
+        description: ""
+        id: oy4gSk9dfV4Rlc86I22Tx
+        name: main_challenge
+      nodes:
+        '[-PRHhvOO7t_l3KcG7oAqp]:httpCall "Stocks Scraper"':
+          data:
+            body: ""
+            errorOnNon200: true
+            headers: |-
+              {
+                  "Content-type": "application/json; charset=UTF-8"
+              }
+            method: GET
+            text: ""
+            url: ""
+            useBodyInput: false
+            useUrlInput: true
+          outgoingConnections:
+            - res_body->"Prompt" 124KLBEBl0ABBN7sxwcxX/stocks
+            - statusCode->"Coalesce" km2VH-Rz5zqptd4HdNQYA/input2
+          visualData: -3819.0473816320136/-1790.1712370279115/280/1470//
+        '[-rTrStoM8a1NL-gsVjeml]:httpCall "Scrape Portfolio"':
+          data:
+            body: ""
+            errorOnNon200: true
+            headers: |-
+              {
+                  "Content-type": "application/json; charset=UTF-8"
+              }
+            method: POST
+            text: ""
+            url: ""
+            useBodyInput: true
+            useUrlInput: true
+          outgoingConnections:
+            - res_body->"Text" hsSGz6jahA57PEBtnTGOr/portfolio
+            - statusCode->"Compare" eyG6vU1Uaw6NhdI7fd2k6/a
+          visualData: -3121.9409066694993/-938.9933826342897/280/1347//
+        '[0BGaPj-0hZp6hWbUb25jv]:graphInput "current_portfolio"':
+          data:
+            dataType: string
+            id: current_portfolio
+            useDefaultValueInput: true
+          outgoingConnections:
+            - data->"Get Final AI Reasons JSON" 73RL5NI8YaSwtFtoeQeSe/json_2
+            - data->"Prompt" 9a1O2BzA7FFalGxkc7Bvf/portfolio
+            - data->"Prompt" EgJe-9-ALDD58AzKL4KI3/position
+            - data->"Prompt" tkiXVkZAjWB4Zx6K9NM2v/portfolio
+          visualData: -1409.3089607118184/32.559831490978695/330/1525//
+        '[0RCJr1o0w91eR-XvvayXl]:coalesce "Coalesce"':
+          outgoingConnections:
+            - output->"Set Global" 5tKXwYZp-NUwjbWB9Hsp3/value
+          visualData: -2509.3540436136223/1504.3307445482972/180/661//
+        '[0qzfU1IRAzDBE8SYmSyuC]:text "Export Composition Endpoint"':
+          data:
+            body: ""
+            normalizeLineEndings: true
+            text: "{{api_server}}/export_graph_composition"
+          outgoingConnections:
+            - output->"Export Portfolio Composition" ZLLxrxGO9SIu1VwVG1XHu/url
+          visualData: -4303.888805931796/-1566.4790889337824/330/1468//
+        '[124KLBEBl0ABBN7sxwcxX]:prompt "Prompt"':
+          data:
+            enableFunctionCall: false
+            promptText: >-
+              Below, the market data for the investor's portfolio for the period
+              of the last 30 days:
+
+
+              Stocks:
+
+
+              {{stocks}}
+
+
+              Funds:
+
+
+              {{funds}}
+
+
+              The interest rate of the period was the following:
+
+
+              {{interest}}
+
+
+              The inflation of the last month had {{inflation}}% variation.
+
+
+
+              You have to return a JSON with 4 keys:
+
+
+              >>template<<"stocks"
+
+              >>explanation<<"stocks" content should be a dictionary with each stock having a key; for each stock, calculate the final return rate of the period and standard deviation.
+
+
+              >>template<<"funds"
+
+              >>explanation<<"funds" content should be a dictionary with each fund having a key; for each fund, calculate the final return rate of the period and standard deviation.
+
+
+              >>template<<"interest_rate"
+
+              >>explanation<<"interest_rate" is string with a summary of any changes, and the accumulated rate for the period.
+
+
+              >>template<<"inflation"
+
+              >>explanation<<"inflation" is the inflation value of the period.
+
+
+
+              Don't call any functions
+            type: user
+            useTypeInput: false
+          outgoingConnections:
+            - output->"Chat" e2di0MRUkRk9N8_muriDf/prompt
+          visualData: -2335.7977328340507/-1734.9419711419564/280/1498//
+        '[15NLSgEUIyjCKxHaiZSgf]:compare "Compare"':
+          data:
+            comparisonFunction: ==
+          outgoingConnections:
+            - output->"If/Else" ofIcHeOHiEbmOYuiM38fj/if
+          visualData: -2231.6428193818397/-223.48000276827975/190/1393//
+        '[2bIOThxiWxnsHoNv0fFNo]:text "Heuristic: Fixed X Variable"':
+          data:
+            normalizeLineEndings: true
+            text: "When prospects of inflation and interest rates are concurrent, there can
+              be opportunities to 'ride indexes'. For example, when inflation is
+              low and interest rate is high, getting an inflation indexed bond
+              can be good, because, most likely, the interest rate will
+              decrease, incentivizing consumer to spend, leading to an increase
+              to inflation, which is good for an inflation indexed asset. The
+              same goes for interest rate indexed bonds: with high inflation,
+              the expected is usually that the interest rate will be increased
+              so the inflation lowers."
+          outgoingConnections:
+            - output->"Prompt" tkiXVkZAjWB4Zx6K9NM2v/heuristic2
+          visualData: -1442.207538824966/811.7811039761788/330/1532//
+        '[3BaNetkhlk0pTicPAisED]:chat "Chat"':
+          data:
+            additionalParameters: []
+            cache: false
+            enableFunctionUse: false
+            headers: []
+            maxTokens: 1024
+            modalitiesIncludeAudio: false
+            modalitiesIncludeText: false
+            model: gpt-4o-mini
+            outputUsage: false
+            parallelFunctionCalling: true
+            reasoningEffort: ""
+            stop: ""
+            temperature: 0.5
+            top_p: 1
+            useAdditionalParametersInput: false
+            useAsGraphPartialOutput: true
+            useFrequencyPenaltyInput: false
+            useMaxTokensInput: false
+            useModelInput: false
+            usePredictedOutput: false
+            usePresencePenaltyInput: false
+            useReasoningEffortInput: false
+            useServerTokenCalculation: true
+            useStop: false
+            useStopInput: false
+            useTemperatureInput: false
+            useTopP: false
+            useTopPInput: false
+            useUseTopPInput: false
+            useUserInput: false
+          outgoingConnections:
+            - response->"Export Portfolio Composition"
+              vYpSlVq3c4cdxetJ26hOl/req_body
+            - response->"Text" Vf5zr67b2mzkxKPK35mzt/input
+          visualData: 825.2908923227452/78.09066984635894/230/1542//
+        '[4WqJ0TefBT9Uyu8IeJvYG]:text "WebScraper Port"':
+          data:
+            normalizeLineEndings: true
+            text: "{{server}}:8001"
+          outgoingConnections:
+            - output->"Funds Scraping Endpoint" RjgB5eDdH4fln27sga6RF/api_server
+            - output->"Stocks Scraping Endpoint" zbP5cvdbYpYt0Z1gXwZqv/api_server
+          visualData: -5053.875923976012/-1786.4890076238328/330/1463//
+        '[4XDRGesJQWWWjM0DLQ1iz]:context "MAX_TOKENS"':
+          data:
+            dataType: any
+            defaultValue: "4000"
+            id: max_tokens
+            useDefaultValueInput: false
+          outgoingConnections:
+            - data->"Set Global" QQ6ygz6K9Drx0l62PKb2v/value
+          visualData: -2684.8469975259177/2625.7698077199657/330/629//
+        '[5tKXwYZp-NUwjbWB9Hsp3]:setGlobal "Set Global"':
+          data:
+            dataType: string
+            id: rivet_project_file_content
+            useIdInput: false
+          visualData: -2270.704193837281/1469.7132543312428/230/662//
+        '[6ZQ4E2nJGcYDksnCYemn9]:setGlobal "Set Global"':
+          data:
+            dataType: string
+            id: backoffice_user_password
+            useIdInput: false
+          visualData: -3282/1451/230/null//
+        '[6ll__X9rIXuU6sF7Np92U]:compare "Compare"':
+          data:
+            comparisonFunction: ==
+          outgoingConnections:
+            - output->"If/Else" eRGr8lRuE90iLgBl8qGya/if
+          visualData: -3582.832190602514/-779.2150036355024/190/1347//
+        '[73RL5NI8YaSwtFtoeQeSe]:subGraph "Get Final AI Reasons JSON"':
+          data:
+            graphId: CFtE0iCYza8rNiWbag0IW
+            useAsGraphPartialOutput: false
+            useErrorOutput: false
+          outgoingConnections:
+            - final_ai_reasons_json->"Graph Output" 95feYAM4b-snMyOJU6_XM/value
+          visualData: 334.2729113861066/565.2459388066511/330/1135//
+        '[8R6KwoBpRzNjCtvrGBOEz]:text "API Server"':
+          data:
+            normalizeLineEndings: true
+            text: http://127.0.0.1
+          outgoingConnections:
+            - output->"MacroData Port" dNSdZB043uw_oGoXJQxvj/server
+            - output->"PDF Service Port" U765kfUamMUIDaKtNh9MF/server
+            - output->"Report Port" WKbq1dSkrk_MzjRyzkGAy/server
+            - output->"WebScraper Port" 4WqJ0TefBT9Uyu8IeJvYG/server
+          visualData: -5622.891365439623/-1771.8177286084258/330/1480//
+        '[95feYAM4b-snMyOJU6_XM]:graphOutput "Graph Output"':
+          data:
+            dataType: object
+            id: final_ai_reasons_json
+          visualData: 840.5795747607331/567.9531733756834/330/1134//
+        '[9a1O2BzA7FFalGxkc7Bvf]:prompt "Prompt"':
+          data:
+            enableFunctionCall: false
+            promptText: >-
+              Your role is to output a string that will compose an investment
+              monthly summary, with the following information:
+
+
+
+
+              {{portfolio}}
+
+              {{performance}}
+
+              {{recommendation}}
+
+
+
+
+              The outline of the return should be the following:
+
+              - A header, containing investor's name, date of analysis, total invested and balance;
+
+              - A short first paragraph, with the highlights of the last 30 days' performance, such as best and worst performing assets (in rate and in absolute value), etc.;
+
+              - A table with the performance of the assets this month;
+
+              - A paragraph with the investment recommendations.
+
+
+
+              The text should be in Portuguese. Format values to currecny or percentage, depending on what it means. Put the final string into a JSON object with key "message". The final output should be json serializable, so no wrapping around the final output with formatting. Markdown formatting can exist within the text, as long as it is properly escaped and not formatting as '```json'
+            type: user
+            useTypeInput: false
+          outgoingConnections:
+            - output->"Chat" 3BaNetkhlk0pTicPAisED/prompt
+          visualData: 326.20801536129085/-72.97670851499964/280/1541//
+        '[9nfc7vfOOqqn9b74Va7Wk]:text "No Portfolio"':
+          data:
+            normalizeLineEndings: true
+            text: No portfolio
+          outgoingConnections:
+            - output->"If/Else" ofIcHeOHiEbmOYuiM38fj/false
+          visualData: -2243.9266225060273/-11.78432476121148/221.01297337359756/1409//
+        '[9zTWpPlIDSOJOMcfl9gjk]:text "Profile Prompt"':
+          data:
+            normalizeLineEndings: true
+            text: "Here's an example of an analysis. Output the JSON object with the
+              'summary' key. Remember: pure JSON."
+          outgoingConnections:
+            - output->"Investor Profile Path"
+              VZ5YIDADZw-SE024g5z26/example_prompt
+          visualData: -4754.764666535318/538.7907753337655/330/1429//
+        '[9zrDirEwNKYTTx2lj7JRG]:text "Report Endpoint"':
+          data:
+            body: ""
+            normalizeLineEndings: true
+            text: "{{api_server}}/report"
+          outgoingConnections:
+            - output->"Export Portfolio Composition" vYpSlVq3c4cdxetJ26hOl/url
+          visualData: -4311.09952588504/-2533.9395654232235/330/1554//
+        '[AFzw8dGBjFW73qErnKQQ8]:context "Context"':
+          data:
+            dataType: boolean
+            defaultValue: "false"
+            id: is_running_on_local_rivet_app
+            useDefaultValueInput: true
+          outgoingConnections:
+            - data->"Compare" vwBcmWGXNmeQCPUHIsnKu/b
+            - data->"Set Global" HB7nZ5M6aGwKGnjbhS4Qn/value
+          visualData: -4263.457777777778/768.1244444444444/330/568//
+        '[BTlRbiJNBX8N7Ha3exdYS]:text "Heuristic: Utilities X Services"':
+          data:
+            normalizeLineEndings: true
+            text: When the interest rate is high, usually the consumer spendage lowers on
+              flexible costs, less on basic living costs. So, it is likely that
+              when the interest rate increases, non-basic service companies
+              devalue, while, when interest rate decreases, these same
+              companiescan increase in value.
+          outgoingConnections:
+            - output->"Prompt" tkiXVkZAjWB4Zx6K9NM2v/heuristic3
+          visualData: -1442.207538824966/1011.7811039761788/330/1532//
+        '[C-5IJqdXlimvzFC5OUYU9]:setGlobal "Set Global"':
+          data:
+            dataType: string
+            id: rivet_project_file_name
+            useIdInput: false
+          visualData: -2399.8482760805014/1238.5225739573727/230/443//
+        '[C0ugGh-AIWrTiPn64qeIK]:httpCall "Initialize Portfolio Scraper"':
+          data:
+            body: ""
+            errorOnNon200: true
+            headers: |-
+              {
+                  "Content-type": "application/json; charset=UTF-8"
+              }
+            method: POST
+            text: ""
+            url: ""
+            useBodyInput: true
+            useUrlInput: true
+          outgoingConnections:
+            - statusCode->"Compare" 6ll__X9rIXuU6sF7Np92U/a
+          visualData: -3903.5548938816783/-867.955142600767/280/1399//
+        '[CsWVFoDNAyHzMX91tLXk-]:coalesce "Coalesce"':
+          outgoingConnections:
+            - output->"Inflation Scraper" lB-BkUgVog4qjOcIB2_xR/url
+          visualData: -3428.0709849069704/-2258.61556648245/180/1488//
+        '[D_f_pgtRI4BMWhO9TNWt3]:context "SYSTEM_ROLE"':
+          data:
+            dataType: string
+            defaultValue: You are a trained lawyer in Brazil. Your job is to read company
+              bylaws and return a JSON with the key pieces of a legal document.
+            id: system_role
+            useDefaultValueInput: false
+          outgoingConnections:
+            - data->"Set Global" TMqjuvQ7OlKv88DMgNaX-/value
+          visualData: -2760.1117799377585/1777.466308742296/330/1157//
+        '[Djl5y_ISwceJQFeKJD-86]:context "MODEL_NAME"':
+          data:
+            dataType: string
+            defaultValue: gpt-4-turbo-preview
+            id: model_name
+            useDefaultValueInput: false
+          outgoingConnections:
+            - data->"Set Global" z4uxTnkfSHVgimAkaDwL0/value
+          visualData: -2736.0186766414827/1973.0803668304561/330/355//
+        '[EJay2-oYpphHOkh-AhYMB]:httpCall "Investor Profile Scraper"':
+          data:
+            body: ""
+            errorOnNon200: true
+            headers: |-
+              {
+                  "Content-type": "application/json; charset=UTF-8"
+              }
+            method: POST
+            text: ""
+            url: ""
+            useBodyInput: true
+            useUrlInput: true
+          outgoingConnections:
+            - res_body->"Prompt" tkiXVkZAjWB4Zx6K9NM2v/profile
+            - statusCode->"Coalesce" x4pU-lDeqZqWlIuL6qXRK/input2
+          visualData: -3578.6487654944603/-210.5843352686007/280/1430//
+        '[EgJe-9-ALDD58AzKL4KI3]:prompt "Prompt"':
+          data:
+            enableFunctionCall: false
+            promptText: >-
+              An investor, whose name is below, has an investment portfolio as
+              followed:
+
+
+              {{position}}
+
+
+
+              Market data for the last 30 days to compute the performance of each asset:
+
+
+              {{market_data}}
+
+
+
+              You should output a JSON with 2 keys:
+
+
+              >>template<<"investor"
+
+              >>explanation<<"investor" contains a string with the investor's name
+
+
+              >>template<<"performance"
+
+              >>explanation<<"performance" contains a dictionary, in which each key is the name one of the investor's assets in the portfolio. Each asset is mapped to a dictionary with 3 keys:
+
+
+              - The asset's current value in the portfolio;
+
+              - The return rate of the last 30 days, which can be retrived from the market data and;
+
+              - The capital gains/losses of the last 30 days, that can be calculated from the return rate, that was just explained, and the current position in the portfolio.
+            type: user
+            useTypeInput: false
+          outgoingConnections:
+            - output->"Chat" F2UW55DpDT3EC27XGDZIi/input
+          visualData: -934.2478580580603/-1120.8896947216988/280/1502//
+        '[F2UW55DpDT3EC27XGDZIi]:subGraph "Chat"':
+          data:
+            graphId: blT81coO59bxyTo9Vdut5
+            inputData:
+              max_tokens:
+                type: string
+                value: "1000"
+              model_name:
+                type: string
+                value: ""
+              openai_functions_description:
+                type: string
+                value: ""
+            useAsGraphPartialOutput: false
+            useErrorOutput: false
+          outgoingConnections:
+            - functions_response->"Get Final AI Reasons JSON"
+              73RL5NI8YaSwtFtoeQeSe/json_1
+            - functions_response->"Prompt" 9a1O2BzA7FFalGxkc7Bvf/performance
+          visualData: -514.703261327905/-402.26040836927405/330/1533//
+        '[HB7nZ5M6aGwKGnjbhS4Qn]:setGlobal "Set Global"':
+          data:
+            dataType: boolean
+            id: is_running_on_local_rivet_app
+            useIdInput: false
+          visualData: -3723.602962962963/918.045925925926/230/569//
+        '[HT7Z9BfBiIz6suEAFN2wS]:setGlobal "Set Global"':
+          data:
+            dataType: any
+            id: temperature
+            useIdInput: false
+          visualData: -2277.6176898777703/2256.173274733328/230/367//
+        '[HdKteeoaMPwBqfw1mPw1M]:context "FORCE_MODEL_CHANGE"':
+          data:
+            dataType: string
+            defaultValue: "false"
+            id: force_model_change
+            useDefaultValueInput: false
+          outgoingConnections:
+            - data->"Set Global" ySq9gxW0JB9Nn3XtvXM6U/value
+          visualData: -2683.8539085490575/2933.1346886232377/355.64976463421/633//
+        '[HzQUlRztn2wi1xsExdSSK]:context "TOP_P"':
+          data:
+            dataType: any
+            defaultValue: "0.5"
+            id: top_p
+            useDefaultValueInput: false
+          outgoingConnections:
+            - data->"Set Global" OL7vv5oAz4giHgBY7pM9j/value
+          visualData: -2693.306972225292/2344.993124625841/330/357//
+        '[I0YZAxTmr7g6aXDgGyISv]:httpCall "Interest Rate Process"':
+          data:
+            body: ""
+            errorOnNon200: true
+            headers: |-
+              {
+                  "Content-type": "application/json; charset=UTF-8"
+              }
+            method: GET
+            text: ""
+            url: ""
+            useBodyInput: false
+            useUrlInput: true
+          outgoingConnections:
+            - res_body->"Prompt" 124KLBEBl0ABBN7sxwcxX/interest
+            - statusCode->"Coalesce" CsWVFoDNAyHzMX91tLXk-/input2
+          visualData: -3844.6991224735284/-2179.7046567661782/280/1489//
+        '[ICjvgRL4O3bV8HV-Tx3U_]:text "Profile Prompt"':
+          data:
+            normalizeLineEndings: true
+            text: "Here's an example of an investor. Output the JSON object with the 3 keys.
+              Remember: pure JSON."
+          outgoingConnections:
+            - output->"Investor Profile Path"
+              fg8xoKK5tUBBeiBT2dNPG/example_prompt
+          visualData: -4726.985736338846/126.48367923500318/330/1434//
+        '[InH7qadl8x2Dmhe3bK9dQ]:setGlobal "SET GLOBAL"':
+          data:
+            dataType: string
+            id: backoffice_user_email
+            text: ""
+            useIdInput: false
+          visualData: -3285/1220/230/483//
+        '[KWBqHYD_RirEA5LonZWuF]:boolean "Bool"':
+          data:
+            value: true
+          outgoingConnections:
+            - value->"Context" AFzw8dGBjFW73qErnKQQ8/default
+          visualData: -4562/817/160/null//
+        '[KgmZKTz6VpsE6DlHhLv2I]:text "Example Portfolio Path"':
+          data:
+            body: ""
+            normalizeLineEndings: true
+            text: |-
+              {
+                  "instruction": "{{system_instruction}}",
+                  "prompt": "{{example_prompt}}",
+                  "path": "{{project_directory}}/example_portfolio.pdf"
+              }
+          outgoingConnections:
+            - output->"Initialize Portfolio Scraper"
+              C0ugGh-AIWrTiPn64qeIK/req_body
+          visualData: -4313.850640261788/-691.987995813905/330/1347//
+        '[Kveyd4ySHTxgZ8t34kp7p]:coalesce "Coalesce"':
+          outgoingConnections:
+            - output->"Investor Profile Scraper" EJay2-oYpphHOkh-AhYMB/req_body
+          visualData: -3859.1319558396694/-54.95835051863811/180/1431//
+        '[KxMx4BbCfvO-4zhZJOz8V]:setGlobal "Set Global"':
+          data:
+            dataType: string
+            id: rivet_graph_name
+            useIdInput: false
+          visualData: -3246.6666666666665/1723.111111111111/230/489//
+        '[LI0cd76sb4KJEKHWmmRXn]:context "TEMPERATURE"':
+          data:
+            dataType: any
+            defaultValue: "0.2"
+            id: temperature
+            promptText: ""
+            useDefaultValueInput: false
+          outgoingConnections:
+            - data->"Set Global" HT7Z9BfBiIz6suEAFN2wS/value
+          visualData: -2711.8114664086957/2159.7349187457767/330/356//
+        '[M4WvDO4iH44_YEOPKOrxo]:text "BACKOFFICE USER EMAIL"':
+          data:
+            text: mateus@talismanai.co
+          outgoingConnections:
+            - output->"SET GLOBAL" InH7qadl8x2Dmhe3bK9dQ/value
+          visualData: -3740/1214/330/572//
+        '[NUXA2VIkC8h5AFzp-FC1F]:setGlobal "Set Global"':
+          data:
+            dataType: string
+            id: template_name
+            useIdInput: false
+          visualData: -2480.4686470226147/764.8182721033512/230/660//
+        '[OL7vv5oAz4giHgBY7pM9j]:setGlobal "Set Global"':
+          data:
+            dataType: any
+            id: top_p
+            useIdInput: false
+          visualData: -2247.0095905779726/2487.2663780296043/230/368//
+        '[OQFZUZRbfplp-RKAanIPn]:text "Initial instruction"':
+          data:
+            normalizeLineEndings: true
+            text: "You will receive lists of images, each list as if they were an excel file
+              exported to pdf, with pages converted to images. The contents are
+              supposed to be investment portfolio position summaries. When the
+              rows overflow the pdf page size, the overflowed rows are exported
+              into consecutive pages after the fitted rows. When the columns
+              overflow the pdf page size, the overflowed columns are exported
+              into pages after the fitted rows and columns. For example, if the
+              page size only fits 10 rows and 8 columns, an excel file with 20
+              columns and 12 rows would be exported into a pdf file of 6 pages:
+              [page 1]: rows 1-10, columns A-H, [page 2]: rows 11-12, columns
+              A-H, [page 3]: rows 1-10, columns I-P, [page 4]: rows 11-12,
+              columns I-P, [page 5]: rows 1-10, columns Q-T, [page 6]: rows
+              11-12, columns Q-T. To analyze the data, it would be necessary to
+              concatenate vertically pages 1-2, as 'part1', 3-4, as 'part2', and
+              5-6, as 'part3', concatenating the 'parts' horizontally. The file
+              is divided into tables of different asset classes and it
+              components. It tipically also has a header. For example, the
+              Stocks class can have its total position and the details of each
+              stock in the portfolio. The class and its components's details
+              compound a whole table. Using the logic explained, your role is to
+              output a JSON format with a key for the header info and a key for
+              each concatenated table of asset class."
+          outgoingConnections:
+            - output->"Example Portfolio Path"
+              KgmZKTz6VpsE6DlHhLv2I/system_instruction
+          visualData: -4739.424642130438/-784.8256812941455/330/1380//
+        '[QFAxw7FWMRWPCws8VFkm_]:readFile "Rivet Project File Content"':
+          data:
+            asBinary: false
+            errorOnMissingFile: false
+            path: /Users/matkwon/Library/Mobile
+              Documents/com~apple~CloudDocs/Enter/Challenge/mk_trial.rivet-project
+            usePathInput: false
+          outgoingConnections:
+            - content->"Coalesce" 0RCJr1o0w91eR-XvvayXl/input1
+          visualData: -2876.8888888888887/1455.4444444444443/280/552//
+        '[QQ6ygz6K9Drx0l62PKb2v]:setGlobal "Set Global"':
+          data:
+            dataType: any
+            id: max_tokens
+            useIdInput: false
+          visualData: -2233.722808447473/2749.9375886186344/230/369//
+        '[RjgB5eDdH4fln27sga6RF]:text "Funds Scraping Endpoint"':
+          data:
+            body: ""
+            normalizeLineEndings: true
+            text: "{{api_server}}/funds"
+          outgoingConnections:
+            - output->"Coalesce" km2VH-Rz5zqptd4HdNQYA/input1
+          visualData: -4297.393610744244/-1902.2631834428119/330/1458//
+        '[SggRGCdiiBDZD5-Li71aU]:text "Ping Endpoint"':
+          data:
+            body: ""
+            normalizeLineEndings: true
+            text: "{{api_server}}/ping"
+          outgoingConnections:
+            - output->"If/Else" eRGr8lRuE90iLgBl8qGya/false
+            - output->"If/Else" vyGcyf4ih3Wt3UZI8Hkmq/false
+          visualData: -4299.21141084502/-1031.4661056689235/330/1347//
+        '[SlyoTYWbI37X-geT8yv5Q]:httpCall "Macro Outlook Scraper"':
+          data:
+            body: ""
+            errorOnNon200: true
+            headers: |-
+              {
+                  "Content-type": "application/json; charset=UTF-8"
+              }
+            method: POST
+            text: ""
+            url: ""
+            useBodyInput: true
+            useUrlInput: true
+          outgoingConnections:
+            - res_body->"Prompt" tkiXVkZAjWB4Zx6K9NM2v/macro_outlook
+          visualData: -3545.849214463492/234.7656921958358/280/1437//
+        '[T0C3lKGwyRU2gnPvcSdbC]:httpCall "Process Portfolio"':
+          data:
+            body: ""
+            errorOnNon200: true
+            headers: |-
+              {
+                  "Content-type": "application/json; charset=UTF-8"
+              }
+            method: POST
+            text: ""
+            url: ""
+            useBodyInput: true
+            useUrlInput: true
+          outgoingConnections:
+            - res_body->"If/Else" ofIcHeOHiEbmOYuiM38fj/true
+            - res_body->"Text" Tb2Pfaro7CSyBzelhHbSb/portfolio
+            - statusCode->"Coalesce" Kveyd4ySHTxgZ8t34kp7p/input2
+            - statusCode->"Coalesce" km2VH-Rz5zqptd4HdNQYA/input3
+            - statusCode->"Compare" 15NLSgEUIyjCKxHaiZSgf/a
+          visualData: -2260.5029168343644/-597.8519388827851/280/1394//
+        '[TMqjuvQ7OlKv88DMgNaX-]:setGlobal "Set Global"':
+          data:
+            dataType: string
+            id: system_role
+            useIdInput: false
+          visualData: -2320.329394293961/1742.1232766786695/230/1153//
+        '[Tb2Pfaro7CSyBzelhHbSb]:text "Text"':
+          data:
+            normalizeLineEndings: true
+            text: |-
+              {
+                  "portfolio": {{portfolio}}
+              }
+          outgoingConnections:
+            - output->"Export Portfolio Composition"
+              ZLLxrxGO9SIu1VwVG1XHu/req_body
+          visualData: -1908.0280941645506/-518.4233400865087/249.5801930961875/1348//
+        '[U765kfUamMUIDaKtNh9MF]:text "PDF Service Port"':
+          data:
+            normalizeLineEndings: true
+            text: "{{server}}:8000"
+          outgoingConnections:
+            - output->"Export Composition Endpoint"
+              0qzfU1IRAzDBE8SYmSyuC/api_server
+            - output->"Initialize Endpoint" fYN7k-ygsS6WXgOx38KAg/api_server
+            - output->"Parse Endpoint" _UEtSeLDmQKNODJ3X18Es/api_server
+            - output->"Ping Endpoint" SggRGCdiiBDZD5-Li71aU/api_server
+            - output->"Process Endpoint" eaohqzX93QhJFt2zg76m0/api_server
+          visualData: -5055.985260085792/-1178.485418229806/330/1465//
+        '[UHDhG_quRUY1_FpnSwYYi]:text "Example Prompt"':
+          data:
+            normalizeLineEndings: true
+            text: "Here's an example: pages 4, 5 and 6 are on the right side of pages 1, 2
+              and 3, consecutively. There is the header, spread out on pages 1
+              and 4, and 2 tables: Stocks and Cryptocurrencies. The first table
+              (Stocks) has its information on page 1 and 4 (top), and 2 and 5
+              (bottom), while the second tables has its contents on page 3 and
+              6, resulting in two tables with eight columns each. The header has
+              balance info, consultant info, date info, etc. Remember, each
+              table should have eight columns each. Also, add a field for
+              currency, such as USD or BRL, both for the header and for each
+              asset. The output should be a JSON format with: [header]: dict
+              with fields and values in header (investor_name, total_balance,
+              total_invested, available_balance, account_number, date, time,
+              consultant_code, consultant_name, and currency); [stocks]: list of
+              dicts with 8 fields and values of each stock, so AZUL4 should have
+              fields of: (ticker_name, position, allocation_pct, profit_pct,
+              investment_date, avg_price, current_price, total_qty, and
+              currency); [cryptocurrencies]: list of dicts with 8 fields and
+              values of each cryptocurrency (analogous to stocks fields); Only
+              return the JSON, without line breaks or other visual formatting,
+              such as code format '```' to wrap the output. The output should be
+              directly usable in python with 'json.loads(output)'. Use '.' as
+              decimal separator and no thousands separator, also without
+              symbols, such as currency symbol or percentage symbol. For dates,
+              use the following format: YYYY-MM-DD, given that the original is
+              DD/MM/YYYY. Remember: pure JSON."
+          outgoingConnections:
+            - output->"Example Portfolio Path"
+              KgmZKTz6VpsE6DlHhLv2I/example_prompt
+          visualData: -4738.219181811225/-601.334096385055/330/1385//
+        '[VZ5YIDADZw-SE024g5z26]:text "Investor Profile Path"':
+          data:
+            body: ""
+            normalizeLineEndings: true
+            text: |-
+              {
+                  "instruction": "{{system_instruction}}",
+                  "prompt": "{{example_prompt}}",
+                  "path": "{{project_directory}}/XP Macro Analysis.pdf"
+              }
+          outgoingConnections:
+            - output->"Coalesce" x4pU-lDeqZqWlIuL6qXRK/input1
+          visualData: -4375.6972081802/394.1880770179263/330/1429//
+        '[Vf5zr67b2mzkxKPK35mzt]:text "Text"':
+          data:
+            normalizeLineEndings: true
+            text: |-
+              {
+                  "message": {{input}}
+              }
+          visualData: 1119.376170456408/328.44242057030715/330/1555//
+        '[WKbq1dSkrk_MzjRyzkGAy]:text "Report Port"':
+          data:
+            normalizeLineEndings: true
+            text: "{{server}}:8003"
+          outgoingConnections:
+            - output->"Report Endpoint" 9zrDirEwNKYTTx2lj7JRG/api_server
+          visualData: -5034.431905076863/-2466.6077608936453/330/1549//
+        '[XYT29YzesTbOFhSpq5rno]:text "Heuristic: Fixed X Variable"':
+          data:
+            normalizeLineEndings: true
+            text: With higher interest rates, the return/risk ratio for bonds get better,
+              while with lower interest rates, the return/risk ratio for bonds
+              get worse. The interest rates levels not necessarily have a direct
+              causality relationship with the return/risk ratio for
+              stocks/variable income, but, for example, supposing the interest
+              rates increase, more investors will invest in fixed income, with
+              the possibility of investing with money taken out of variable
+              income investments, resulting in a possible depreciation. The
+              inverse can happen as well, with lower interest rates, investors
+              will invest less in fixed income, which can lead to an
+              appreciation of varible income assets.
+          outgoingConnections:
+            - output->"Prompt" tkiXVkZAjWB4Zx6K9NM2v/heuristic1
+          visualData: -1439.8555358406427/628.2451248664414/330/1531//
+        '[YvN66OD3KIRSqXS46fmmG]:httpCall "Funds Scraper"':
+          data:
+            body: ""
+            errorOnNon200: true
+            headers: |-
+              {
+                  "Content-type": "application/json; charset=UTF-8"
+              }
+            method: GET
+            text: ""
+            url: ""
+            useBodyInput: false
+            useUrlInput: true
+          outgoingConnections:
+            - res_body->"Prompt" 124KLBEBl0ABBN7sxwcxX/funds
+          visualData: -3167.4499425035597/-1782.308943437584/280/1474//
+        '[ZLLxrxGO9SIu1VwVG1XHu]:httpCall "Export Portfolio Composition"':
+          data:
+            body: ""
+            errorOnNon200: true
+            headers: |-
+              {
+                  "Content-type": "application/json; charset=UTF-8"
+              }
+            method: POST
+            text: ""
+            url: ""
+            useBodyInput: true
+            useUrlInput: true
+          visualData: -1570.3310920480515/-646.9928417084254/280/1349//
+        '[_UEtSeLDmQKNODJ3X18Es]:text "Parse Endpoint"':
+          data:
+            body: ""
+            normalizeLineEndings: true
+            text: "{{api_server}}/parse"
+          outgoingConnections:
+            - output->"If/Else" eRGr8lRuE90iLgBl8qGya/true
+          visualData: -4304.568979852663/-1210.2474868917402/330/1375//
+        '[a2i5eWeY6XVxbUBMm2IG-]:text "Template Name"':
+          data:
+            text: Main challenge
+          outgoingConnections:
+            - output->"Coalesce" u5eiraWbkGdwZAar15htb/input2
+            - output->"Set Global" NUXA2VIkC8h5AFzp-FC1F/value
+          visualData: -2899/780/330/639//
+        '[bouomqYW2eWBZmiHgLXcw]:text "Interest Processing Endpoint"':
+          data:
+            body: ""
+            normalizeLineEndings: true
+            text: "{{api_server}}/interest"
+          outgoingConnections:
+            - output->"Interest Rate Process" I0YZAxTmr7g6aXDgGyISv/url
+          visualData: -4295.568974500589/-2092.7353395849514/330/1485//
+        '[czHAWQxaQpYRZ_7tcZ6fO]:text "Default Rivet Graph Name"':
+          data:
+            text: main_challenge
+          outgoingConnections:
+            - output->"Set Global" KxMx4BbCfvO-4zhZJOz8V/value
+          visualData: -3748.6666666666665/1758/330/621//
+        '[dNSdZB043uw_oGoXJQxvj]:text "MacroData Port"':
+          data:
+            normalizeLineEndings: true
+            text: "{{server}}:8002"
+          outgoingConnections:
+            - output->"Inflation Processing Endpoint"
+              iNEEXgPdaIPlxCdLcGguF/api_server
+            - output->"Interest Processing Endpoint"
+              bouomqYW2eWBZmiHgLXcw/api_server
+          visualData: -5046.577379001393/-2234.2348741213073/330/1481//
+        '[e2di0MRUkRk9N8_muriDf]:chat "Chat"':
+          data:
+            additionalParameters: []
+            cache: false
+            enableFunctionUse: false
+            headers: []
+            maxTokens: 1024
+            modalitiesIncludeAudio: false
+            modalitiesIncludeText: false
+            model: gpt-4o-mini
+            outputUsage: false
+            parallelFunctionCalling: true
+            reasoningEffort: ""
+            stop: ""
+            temperature: 0.5
+            top_p: 1
+            useAdditionalParametersInput: false
+            useAsGraphPartialOutput: true
+            useFrequencyPenaltyInput: false
+            useMaxTokensInput: false
+            useModelInput: false
+            usePredictedOutput: false
+            usePresencePenaltyInput: false
+            useReasoningEffortInput: false
+            useServerTokenCalculation: true
+            useStop: false
+            useStopInput: false
+            useTemperatureInput: false
+            useTopP: false
+            useTopPInput: false
+            useUseTopPInput: false
+            useUserInput: false
+          outgoingConnections:
+            - response->"Prompt" EgJe-9-ALDD58AzKL4KI3/market_data
+            - response->"Prompt" tkiXVkZAjWB4Zx6K9NM2v/market_data
+          visualData: -1596.8455710483731/-1413.0552642090558/230/1518//
+        '[eRGr8lRuE90iLgBl8qGya]:ifElse "If/Else"':
+          data:
+            unconnectedControlFlowExcluded: true
+          outgoingConnections:
+            - output->"Scrape Portfolio" -rTrStoM8a1NL-gsVjeml/url
+          visualData: -3363.1416463988894/-819.9327793515076/205/1347//
+        '[eaohqzX93QhJFt2zg76m0]:text "Process Endpoint"':
+          data:
+            body: ""
+            normalizeLineEndings: true
+            text: "{{api_server}}/process"
+          outgoingConnections:
+            - output->"If/Else" vyGcyf4ih3Wt3UZI8Hkmq/true
+          visualData: -4306.631878604579/-1383.966159457337/330/1467//
+        '[eqvCUMR4hTeMfk7bF0dww]:text "Initial instruction"':
+          data:
+            normalizeLineEndings: true
+            text: "You will receive lists of images, each compounding a text file. Each file
+              describes an investor's risk profile, segmented into 3 sections.
+              The first section giving an overall characterization of the
+              investor's mindset and explanation of behaviour. The second
+              section describes the types of assets that are compatible to the
+              investor's profile. The third section covers the strategy that
+              most likely aligns to the profile, describing allocation,
+              activity, etc. Your task is to output only a JSON object, without
+              additional comments or formatting, such as 'Here it is' or
+              '```json [content]```'. The content of the JSON object should have
+              3 keys, each one containing the information respective to the
+              file's sections. For the first key, 'classification', only one
+              word out of the three: conservative, moderate or bold. For the
+              second key, 'asset_type', a summary of the classes of assets of
+              the second section. For the third key, 'reallocation_strategy',
+              the constraint for capital reallocation for 3 different terms,
+              represented as a dictionary: first key - short term, second key -
+              medium term, and third key - long term, ranging from 'low
+              constraint' to 'high constraint'. Remember: only the pure JSON
+              object is desired. Make it all in English."
+          outgoingConnections:
+            - output->"Investor Profile Path"
+              fg8xoKK5tUBBeiBT2dNPG/system_instruction
+          visualData: -4727.878981473467/-80.70779445019156/330/1433//
+        '[eyG6vU1Uaw6NhdI7fd2k6]:compare "Compare"':
+          data:
+            comparisonFunction: ==
+          outgoingConnections:
+            - output->"If/Else" vyGcyf4ih3Wt3UZI8Hkmq/if
+          visualData: -2787.529834191268/-652.826186553237/190/1347//
+        '[fYN7k-ygsS6WXgOx38KAg]:text "Initialize Endpoint"':
+          data:
+            body: ""
+            normalizeLineEndings: true
+            text: "{{api_server}}/initialize"
+          outgoingConnections:
+            - output->"Initialize Portfolio Scraper" C0ugGh-AIWrTiPn64qeIK/url
+            - output->"Investor Profile Scraper" EJay2-oYpphHOkh-AhYMB/url
+            - output->"Macro Outlook Scraper" SlyoTYWbI37X-geT8yv5Q/url
+          visualData: -4309.728876637385/-860.9964207061942/330/1347//
+        '[fg8xoKK5tUBBeiBT2dNPG]:text "Investor Profile Path"':
+          data:
+            body: ""
+            normalizeLineEndings: true
+            text: |-
+              {
+                  "instruction": "{{system_instruction}}",
+                  "prompt": "{{example_prompt}}",
+                  "path": "{{project_directory}}/Albert – Perfil de risco.pdf"
+              }
+          outgoingConnections:
+            - output->"Coalesce" Kveyd4ySHTxgZ8t34kp7p/input1
+          visualData: -4327.07595979314/-32.01389787456128/330/1432//
+        '[hsSGz6jahA57PEBtnTGOr]:text "Text"':
+          data:
+            normalizeLineEndings: true
+            text: |-
+              {
+                  "portfolio": {{portfolio}}
+              }
+          outgoingConnections:
+            - output->"Process Portfolio" T0C3lKGwyRU2gnPvcSdbC/req_body
+          visualData: -2598.915377744868/-912.4787913839059/249.5801930961875/1347//
+        '[iNEEXgPdaIPlxCdLcGguF]:text "Inflation Processing Endpoint"':
+          data:
+            body: ""
+            normalizeLineEndings: true
+            text: "{{api_server}}/inflation"
+          outgoingConnections:
+            - output->"Coalesce" CsWVFoDNAyHzMX91tLXk-/input1
+          visualData: -4319.289245668103/-2299.629221919984/330/1487//
+        '[iRVNT9OML9qnogd7ZVY9u]:subGraph "Deploy Template Name"':
+          data:
+            graphId: VBfwPp3tXdEmMiB6_sXzD
+            useAsGraphPartialOutput: false
+            useErrorOutput: false
+          visualData: 2653/646/330/411//
+        '[ihDp8JSnMxDY-SEFwq_UT]:getGlobal "Global - Deploy"':
+          data:
+            dataType: boolean
+            id: deploy
+            onDemand: false
+            useIdInput: false
+            wait: true
+          outgoingConnections:
+            - value->"Deploy Template Name" iRVNT9OML9qnogd7ZVY9u/deploy
+          visualData: 2320.267940907117/595.8935897349443/230/541//
+        '[km2VH-Rz5zqptd4HdNQYA]:coalesce "Coalesce"':
+          outgoingConnections:
+            - output->"Funds Scraper" YvN66OD3KIRSqXS46fmmG/url
+          visualData: -3443.799706330702/-1839.9625621871585/180/1476//
+        '[l3ZrYn61QVJMkSYJ_cagM]:text "Rivet Project File Name"':
+          data:
+            text: main_challenge
+          outgoingConnections:
+            - output->"Coalesce" 0RCJr1o0w91eR-XvvayXl/input2
+            - output->"Set Global" C-5IJqdXlimvzFC5OUYU9/value
+          visualData: -2874.2725925925924/1256.5792592592593/330/567//
+        '[lB-BkUgVog4qjOcIB2_xR]:httpCall "Inflation Scraper"':
+          data:
+            body: ""
+            errorOnNon200: true
+            headers: |-
+              {
+                  "Content-type": "application/json; charset=UTF-8"
+              }
+            method: GET
+            text: ""
+            url: ""
+            useBodyInput: false
+            useUrlInput: true
+          outgoingConnections:
+            - res_body->"Prompt" 124KLBEBl0ABBN7sxwcxX/inflation
+          visualData: -3151.721221079828/-2200.9619477328756/280/1488//
+        '[lfccXcQ7NSBOKzU3YZqD5]:number "Success HTTP"':
+          data:
+            round: false
+            roundTo: 0
+            value: 200
+          outgoingConnections:
+            - value->"Compare" 15NLSgEUIyjCKxHaiZSgf/b
+            - value->"Compare" 6ll__X9rIXuU6sF7Np92U/b
+            - value->"Compare" eyG6vU1Uaw6NhdI7fd2k6/b
+          visualData: -3887.7591455597753/-499.7215474954275/230/1347//
+        '[ofIcHeOHiEbmOYuiM38fj]:ifElse "If/Else"':
+          data:
+            unconnectedControlFlowExcluded: true
+          outgoingConnections:
+            - output->"Coalesce" u5eiraWbkGdwZAar15htb/input1
+          visualData: -1941.5452147090002/-310.17454822490697/205/1355//
+        '[pHmEx3aXTf1LbragICZQ2]:text "BACKOFFICE USER PASSWORD"':
+          data:
+            text: 3Q75=866YjOt!
+          outgoingConnections:
+            - output->"Set Global" 6ZQ4E2nJGcYDksnCYemn9/value
+          visualData: -3751.597266811033/1468.4055459121698/330/665//
+        '[p_JRScgtf5qGzc-RCKX18]:text "Project Directory"':
+          data:
+            body: ""
+            headers: ""
+            normalizeLineEndings: true
+            text: /Users/matkwon/Library/Mobile
+              Documents/com~apple~CloudDocs/Enter/Challenge
+          outgoingConnections:
+            - output->"Client Portfolio Path"
+              tKwuyLMLcDyCHpgNpHmo3/project_directory
+            - output->"Example Portfolio Path"
+              KgmZKTz6VpsE6DlHhLv2I/project_directory
+            - output->"Investor Profile Path"
+              VZ5YIDADZw-SE024g5z26/project_directory
+            - output->"Investor Profile Path"
+              fg8xoKK5tUBBeiBT2dNPG/project_directory
+          visualData: -5205.096855588904/-339.2383013119279/330/1379//
+        '[rAQNirmJeNqIHpRjPi-g3]:text "Text"':
+          data:
+            normalizeLineEndings: true
+            text: |-
+              {
+                  "message": {{input}}
+              }
+          visualData: -133.5827225452419/1051.0249546337775/330/1539//
+        '[tKwuyLMLcDyCHpgNpHmo3]:text "Client Portfolio Path"':
+          data:
+            body: ""
+            normalizeLineEndings: true
+            text: >-
+              {
+                  "prompt": "{{prompt}}",
+                  "path": "{{project_directory}}/Albert – PosicaoDetalhada - Sua carteira.pdf"
+              }
+          outgoingConnections:
+            - output->"Scrape Portfolio" -rTrStoM8a1NL-gsVjeml/req_body
+          visualData: -4324.257701931494/-357.05017116383846/330/1421//
+        '[tkiXVkZAjWB4Zx6K9NM2v]:prompt "Prompt"':
+          data:
+            enableFunctionCall: false
+            promptText: >
+              The investor's risk profile is:
+
+
+              {{profile}}
+
+
+
+              The current macroeconomic outlook from specialists is the following:
+
+
+              {{macro_outlook}}
+
+
+              The investor's current portfolio:
+
+
+              {{portfolio}}
+
+
+              The past 30 days market data and the investor's portfolio assets performance:
+
+
+              {{market_data}}
+
+
+              Here are some macroeconomic-based heuristics that drive overall investments:
+
+
+              {{heuristic1}}
+
+              {{heuristic2}}
+
+              {{heuristic3}}
+
+
+
+              Based on these, you should output a JSON with 2 keys:
+
+
+              >>template<<"direction": string
+
+              >>explanation<<"direction" should be a short text suggesting asset classes that the investor should invest, including ones that are not already in the portfolio (in general, not specific assets) and assets that the investor should deallocate. When refering to assets already in the portfolio, specify.
+
+
+              >>template<<"justification": string
+
+              >>explanation<<"justification" should be a text explaining why the movements on "direction" were suggested
+
+
+              The text should be in Portuguese
+            type: user
+            useTypeInput: false
+          outgoingConnections:
+            - output->"Chat" uj4Q4HLyrQG0kJt3NZfrA/prompt
+          visualData: -865.536129845315/316.61118228592244/280/1534//
+        '[u5eiraWbkGdwZAar15htb]:coalesce "Coalesce"':
+          outgoingConnections:
+            - output->"current_portfolio" 0BGaPj-0hZp6hWbUb25jv/default
+          visualData: -1661.3793986643807/-64.57337631138974/180/1358//
+        '[uj4Q4HLyrQG0kJt3NZfrA]:chat "Chat"':
+          data:
+            additionalParameters: []
+            cache: false
+            enableFunctionUse: false
+            headers: []
+            maxTokens: 1024
+            modalitiesIncludeAudio: false
+            modalitiesIncludeText: false
+            model: gpt-4o-mini
+            outputUsage: false
+            parallelFunctionCalling: true
+            reasoningEffort: ""
+            stop: ""
+            temperature: 0.5
+            top_p: 1
+            useAdditionalParametersInput: false
+            useAsGraphPartialOutput: true
+            useFrequencyPenaltyInput: false
+            useMaxTokensInput: false
+            useModelInput: false
+            usePredictedOutput: false
+            usePresencePenaltyInput: false
+            useReasoningEffortInput: false
+            useServerTokenCalculation: true
+            useStop: false
+            useStopInput: false
+            useTemperatureInput: false
+            useTopP: false
+            useTopPInput: false
+            useUseTopPInput: false
+            useUserInput: false
+          outgoingConnections:
+            - response->"Get Final AI Reasons JSON" 73RL5NI8YaSwtFtoeQeSe/json_3
+            - response->"Prompt" 9a1O2BzA7FFalGxkc7Bvf/recommendation
+            - response->"Text" rAQNirmJeNqIHpRjPi-g3/input
+          visualData: -464.1652078475071/615.8622008790281/230/1536//
+        '[vYpSlVq3c4cdxetJ26hOl]:httpCall "Export Portfolio Composition"':
+          data:
+            body: ""
+            errorOnNon200: true
+            headers: |-
+              {
+                  "Content-type": "application/json; charset=UTF-8"
+              }
+            method: POST
+            text: ""
+            url: ""
+            useBodyInput: true
+            useUrlInput: true
+          visualData: 1484.8448480884724/28.720268874208443/280/1544//
+        '[vwBcmWGXNmeQCPUHIsnKu]:compare "Compare"':
+          data:
+            comparisonFunction: and
+          outgoingConnections:
+            - output->"Set Global" zl0vrqtxhyCwz_2fuBtjh/value
+          visualData: -2859/1004/190/528//
+        '[vyGcyf4ih3Wt3UZI8Hkmq]:ifElse "If/Else"':
+          data:
+            unconnectedControlFlowExcluded: true
+          outgoingConnections:
+            - output->"Process Portfolio" T0C3lKGwyRU2gnPvcSdbC/url
+          visualData: -2562.7303310971242/-687.1120255956914/205/1347//
+        '[x4pU-lDeqZqWlIuL6qXRK]:coalesce "Coalesce"':
+          outgoingConnections:
+            - output->"Macro Outlook Scraper" SlyoTYWbI37X-geT8yv5Q/req_body
+          visualData: -3867.6776450030384/377.59745985818887/180/1436//
+        '[x6035pjW7OiLJeMPm2VMk]:text "Initial instruction"':
+          data:
+            normalizeLineEndings: true
+            text: You will receive lists of images, each compounding a file with text,
+              tables and graphs. Each file is an analysis of the macroeconomic
+              outlook for the short, medium and long terms, but mostly for the
+              short term. Your goal is to summarize into text of 500 words at
+              most, with key insights of the main macroeconomic indicators and
+              indexes. The summary should be contained in a JSON object of key
+              'summary', and only so, without any additional comments or
+              formatting, such as 'Here it is' or '```json [content]```'.
+          outgoingConnections:
+            - output->"Investor Profile Path"
+              VZ5YIDADZw-SE024g5z26/system_instruction
+          visualData: -4748.710472273076/335.07302134700205/330/1429//
+        '[ySq9gxW0JB9Nn3XtvXM6U]:setGlobal "Set Global"':
+          data:
+            dataType: string
+            id: force_model_change
+            useIdInput: false
+          visualData: -2197.714752897587/3055.3148794289586/230/634//
+        '[ypw23LIKC38AVJj5S05Vi]:boolean "Deploy"':
+          data:
+            promptText: ""
+            value: false
+          outgoingConnections:
+            - value->"Compare" vwBcmWGXNmeQCPUHIsnKu/a
+          visualData: -3372.9333333333334/652.9333333333334/160/638//
+        '[z4uxTnkfSHVgimAkaDwL0]:setGlobal "Set Global"':
+          data:
+            dataType: string
+            id: model_name
+            useIdInput: false
+          visualData: -2303.0080771246635/1991.3069856612458/230/540//
+        '[zCM_dzCXRENi-yxKiTWSr]:text "Production prompt"':
+          data:
+            normalizeLineEndings: true
+            text: "Now do it to this case. Don't forget about the column count of each table
+              can be greater the shown in a single page before putting the data
+              in the JSON. Look out for asset classes, such as funds, fixed
+              income, derivatives, etc, that can have different fields, such as
+              quote_date, etc. Output in English. Remember, as explained: pure
+              JSON, no additional comments or formatting such as code format
+              '```' to wrap the output. Remember all the instructions given on
+              the previous prompt as well."
+          outgoingConnections:
+            - output->"Client Portfolio Path" tKwuyLMLcDyCHpgNpHmo3/prompt
+          visualData: -4748.065427744046/-394.4615600989984/330/1419//
+        '[zbP5cvdbYpYt0Z1gXwZqv]:text "Stocks Scraping Endpoint"':
+          data:
+            body: ""
+            normalizeLineEndings: true
+            text: "{{api_server}}/stocks"
+          outgoingConnections:
+            - output->"Stocks Scraper" -PRHhvOO7t_l3KcG7oAqp/url
+          visualData: -4297.393610744244/-1736.3172572463518/330/1461//
+        '[zl0vrqtxhyCwz_2fuBtjh]:setGlobal "Set Global"':
+          data:
+            dataType: boolean
+            id: deploy
+            useIdInput: false
+          visualData: -2400.8482760805014/1044.5225739573727/230/512//
+  metadata:
+    description: ""
+    id: fojwufjewfj94f
+    title: talisman_test
+  plugins:
+    - id: anthropic
+      name: Anthropic
+      type: built-in
+    - id: rivet-plugin-example-python-exec@latest
+      package: rivet-plugin-example-python-exec
+      tag: latest
+      type: package
+    - id: rivet-plugin-fs@latest
+      package: rivet-plugin-fs
+      tag: latest
+      type: package
+  references: []

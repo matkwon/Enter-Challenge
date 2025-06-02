@@ -1,0 +1,2 @@
+bond_name,position,allocation_pct,applied_value,market_rate,application_date,maturity_date,currency,profit_pct,class
+CDB BANCO C6 CONSIGNADO S.A. - SET/2024,40478.75,12.9662201596355,30000.0,IPCA +5.45,2021-09-06,2024-09-05,BRL,34.92916666666665,fixed_income

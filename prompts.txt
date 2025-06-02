@@ -1,0 +1,46 @@
+initial_instruction = """
+    You will receive lists of images, each list as if they were an excel file exported to pdf, with pages converted to images.
+    The contents are supposed to be investment portfolio position summaries.
+    When the rows overflow the pdf page size, the overflowed rows are exported into consecutive pages after the fitted rows.
+    When the columns overflow the pdf page size, the overflowed columns are exported into pages after the fitted rows and columns.
+    For example, if the page size only fits 10 rows and 8 columns, an excel file with 20 columns and 12 rows would be exported into
+    a pdf file of 6 pages:
+        - page 1: rows 1-10, columns A-H
+        - page 2: rows 11-12, columns A-H
+        - page 3: rows 1-10, columns I-P
+        - page 4: rows 11-12, columns I-P
+        - page 5: rows 1-10, columns Q-T
+        - page 6: rows 11-12, columns Q-T
+    To analyze the data, it would be necessary to concatenate vertically pages 1-2, as "part1", 3-4, as "part2", and 5-6, as "part3", concatenating the "parts" horizontally.
+    The file is divided into tables of different asset classes and it components. It tipically also has a header.
+    For example, the Stocks class can have its total position and the details of each stock in the portfolio. The class and its components's details compound a whole table.
+    Using the logic explained, your role is to output a JSON format with a key for the header info and a key for each concatenated table of asset class.
+"""
+
+example_prompt = """
+    Here's an example: pages 4, 5 and 6 are on the right side of pages 1, 2 and 3, consecutively.
+    There is the header, spread out on pages 1 and 4, and 2 tables: Stocks and Cryptocurrencies.
+    The first table (Stocks) has its information on page 1 and 4 (top), and 2 and 5 (bottom),
+    while the second tables has its contents on page 3 and 6, resulting in two tables with eight columns each.
+    The header has balance info, consultant info, date info, etc.
+    Remember, each table should have eight columns each.
+    Also, add a field for currency, such as USD or BRL, both for the header and for each asset.
+    The output should be a JSON format with:
+        - "header": dict with fields and values in header:
+            investor_name, total_balance, total_invested, available_balance, account_number, date, time, consultant_code, consultant_name, and currency;
+        - "stocks": list of dicts with 8 fields and values of each stock, so "AZUL4" should have fields of:
+            ticker_name, position, allocation_pct, profit_pct, investment_date, avg_price, current_price, total_qty, and currency;
+        - "cryptocurrencies": list of dicts with 8 fields and values of each cryptocurrency (analogous to stocks' fields);
+    Only return the JSON, without line breaks or other visual formatting, such as code format "```" to wrap the output.
+    The output should be directly usable in python with "json.loads(output)".
+    Use "." as decimal separator and no thousands separator, also without symbols, such as currency symbol or percentage symbol.
+    For dates, use the following format: YYYY-MM-DD.
+    Remember: pure JSON.
+"""
+
+prompt = """
+    Now do it to this case.
+    Don't forget about the column count of each table can be greater the shown in a single page before putting the data in the JSON.
+    Look out for asset classes, such as funds, fixed income, derivatives, etc, that can have different fields, such as quote_date, etc.
+    Output in English. Remember, as explained: pure JSON, no additional comments or formatting such as code format "```" to wrap the output.
+"""
