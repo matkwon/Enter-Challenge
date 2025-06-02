@@ -12,3 +12,6 @@ uvicorn pdfscraper_server:app --port 8000 && uvicorn webscraper_server:app --por
 ```
 
 Also, create a `.env` file with the `OPENAI_API_KEY` variable.
+
+
+The Rivet project file to load is `mk_trial.rivet-project`.
